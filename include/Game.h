@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <Viewport.h>
+#include <Map.h>
 
 class Game
 {
@@ -19,7 +20,7 @@ public:
 	void Update(const double& dt);
 	void Draw(EGEMath::Viewport& viewport);	
 private:
-
+	Map map;
 };
 
 #endif
