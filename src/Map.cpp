@@ -4,7 +4,7 @@ using namespace EGEMath;
 
 Map::Map()
 {
-	textures["background"] = new Texture("../../assets/map.png");
+	textures["background"] = new Texture("map.png");
 	textures["forest"] = new Texture("forest.png");
 	textures["swamp"] = new Texture("swamp.png");
 }
