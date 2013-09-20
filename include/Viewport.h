@@ -1,3 +1,6 @@
+#ifndef VIEWPORT_H
+#define VIEWPORT_H
+
 #include <SFML\Graphics.hpp>
 #include <Sprite.h>
 #include <Text.h>
@@ -23,3 +26,5 @@ private:
 };
 
 }
+
+#endif

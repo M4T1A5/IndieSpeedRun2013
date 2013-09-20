@@ -1,9 +1,12 @@
 #include <SFML\Graphics.hpp>
 #include <Game.h>
+#include <Viewport.h>
 
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1280,720), "I dont even");
+	EGEMath::Viewport viewport(&window);
+
 	Game game;
 
 	// Deltatime
@@ -22,7 +25,7 @@ int main()
 		game.Update(dt);
 
         window.clear();
-		game.Draw(window);
+		game.Draw(viewport);
         window.display();
 		dt = clock.restart().asMicroseconds() / 1000000.0;
     }
