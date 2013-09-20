@@ -2,6 +2,7 @@
 #define MAP_H
 
 #include <Sprite.h>
+#include <Viewport.h>
 #include <string>
 
 class Map
@@ -16,10 +17,10 @@ public:
 
 	Map();
 	~Map();
-	void LoadMap(std::string fileName);
+	//void LoadMap(std::string fileName);
 	void Update();
-	void Draw();
-	void Addelement(MapElements mapElement);	
+	void Draw(EGEMath::Viewport& viewport);
+	void AddElement(MapElements mapElement);	
 private:
 	std::vector<EGEMath::Sprite*> sprites;
 	std::map<std::string, EGEMath::Texture*> textures;

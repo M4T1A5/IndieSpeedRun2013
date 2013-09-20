@@ -7,6 +7,7 @@ Map::Map()
 	textures["background"] = new Texture("map.png");
 	textures["forest"] = new Texture("forest.png");
 	textures["swamp"] = new Texture("swamp.png");
+	AddElement(MapElements::Background);
 }
 
 
@@ -15,22 +16,20 @@ Map::~Map()
 	textures.empty();
 }
 
-void Map::LoadMap(std::string fileName)
-{
-	Addelement(MapElements::Background);
-}
-
 void Map::Update()
 {
 
 }
 
-void Map::Draw()
+void Map::Draw(Viewport& viewport)
 {
-
+	for(size_t i = 0; i < sprites.size(); ++i)
+	{
+		viewport.draw(sprites[i]);
+	}
 }
 
-void Map::Addelement(MapElements mapElement)
+void Map::AddElement(MapElements mapElement)
 {
 	std::string elementName;
 	switch(mapElement)
