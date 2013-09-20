@@ -80,23 +80,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\Game.cpp" />
-    <ClCompile Include="..\src\main.cpp" />
-    <ClCompile Include="..\src\Map.cpp" />
-    <ClCompile Include="..\src\Rectangle.cpp" />
-    <ClCompile Include="..\src\Sprite.cpp" />
-    <ClCompile Include="..\src\Text.cpp" />
-    <ClCompile Include="..\src\Vector.cpp" />
-    <ClCompile Include="..\src\Viewport.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Map.cpp" />
+    <ClCompile Include="src\Rectangle.cpp" />
+    <ClCompile Include="src\Sprite.cpp" />
+    <ClCompile Include="src\Text.cpp" />
+    <ClCompile Include="src\Vector.cpp" />
+    <ClCompile Include="src\Viewport.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\EGEMath\Rectangle.h" />
-    <ClInclude Include="..\include\EGEMath\Vector.h" />
-    <ClInclude Include="..\include\Game.h" />
-    <ClInclude Include="..\include\Map.h" />
-    <ClInclude Include="..\include\Sprite.h" />
-    <ClInclude Include="..\include\Text.h" />
-    <ClInclude Include="..\include\Viewport.h" />
+    <ClInclude Include="include\EGEMath\Rectangle.h" />
+    <ClInclude Include="include\EGEMath\Vector.h" />
+    <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\Map.h" />
+    <ClInclude Include="include\Sprite.h" />
+    <ClInclude Include="include\Text.h" />
+    <ClInclude Include="include\Viewport.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
