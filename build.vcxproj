@@ -84,6 +84,8 @@
     <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Map.cpp" />
+    <ClCompile Include="src\Particle.cpp" />
+    <ClCompile Include="src\ParticleEngine.cpp" />
     <ClCompile Include="src\Rectangle.cpp" />
     <ClCompile Include="src\Sprite.cpp" />
     <ClCompile Include="src\Text.cpp" />
@@ -96,6 +98,8 @@
     <ClInclude Include="include\EGEMath\Vector.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\Map.h" />
+    <ClInclude Include="include\Particle.h" />
+    <ClInclude Include="include\ParticleEngine.h" />
     <ClInclude Include="include\Sprite.h" />
     <ClInclude Include="include\Text.h" />
     <ClInclude Include="include\Viewport.h" />
