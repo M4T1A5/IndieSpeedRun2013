@@ -7,14 +7,22 @@
 class Map
 {
 public:
-	Map(std::string fileName);
+	enum MapElements
+	{
+		Background,
+		Forest,
+		Swamp
+	};
+
+	Map();
 	~Map();
 	void LoadMap(std::string fileName);
 	void Update();
 	void Draw();
-	void Addelement(EGEMath::Sprite* sprite);	
+	void Addelement(MapElements mapElement);	
 private:
 	std::vector<EGEMath::Sprite*> sprites;
+	std::map<std::string, EGEMath::Texture*> textures;
 };
 
 #endif
