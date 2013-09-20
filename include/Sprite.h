@@ -1,3 +1,6 @@
+#ifndef SPRITE_H
+#define SPRITE_H
+
 #include <SFML\Graphics.hpp>
 #include <EGEMath\Vector.h>
 #include <EGEMath\Rectangle.h>
@@ -59,3 +62,5 @@ private:
 };
 
 }
+
+#endif

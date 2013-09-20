@@ -19,7 +19,7 @@ void Game::Update(const double& dt)
 
 }
 
-void Game::Draw(sf::RenderWindow& window)
+void Game::Draw(EGEMath::Viewport& viewport)
 {
 
 }

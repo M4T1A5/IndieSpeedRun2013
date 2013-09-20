@@ -1,7 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <SFML\Graphics.hpp>
+#include <Viewport.h>
 
 class Game
 {
@@ -17,7 +17,7 @@ public:
 	~Game();
 
 	void Update(const double& dt);
-	void Draw(sf::RenderWindow& window);	
+	void Draw(EGEMath::Viewport& viewport);	
 private:
 
 };
