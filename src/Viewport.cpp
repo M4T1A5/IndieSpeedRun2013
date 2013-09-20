@@ -4,8 +4,11 @@ namespace EGEMath
 {
 
 Viewport::Viewport(sf::RenderWindow* window)
-	: m_window(window)
-{}
+	: m_window(window),
+	  m_mapView(sf::Vector2f(0,0),sf::Vector2f(window->getSize())),
+	  m_uiView(sf::Vector2f(0,0),sf::Vector2f(window->getSize()))
+{
+}
 Viewport::~Viewport()
 {}
 void Viewport::draw(EGEMath::Sprite* sprite)
@@ -18,8 +21,11 @@ void Viewport::draw(EGEMath::Text* text)
 }
 void Viewport::renderSprites()
 {
+	m_window->setView(m_mapView);
  	for (int i = 0; i < LAYER_COUNT + 1; ++i)
 	{
+		if (i == 290)
+			m_window->setView(m_uiView);
 		for(unsigned int j = 0; j < m_objects[i].size(); ++j)
 		{
 			m_window->draw(*m_objects[i][j]);
@@ -30,6 +36,18 @@ void Viewport::renderSprites()
 void Viewport::close()
 {
 	m_window->close();
+}
+Vector Viewport::getWindowSize()
+{
+	return Vector(m_window->getSize());
+}
+Vector Viewport::getCameraPosition()
+{
+	return m_mapView.getCenter();
+}
+void Viewport::setCameraPosition(const Vector Position)
+{
+	m_mapView.setCenter(Position.x,Position.y);
 }
 
 }

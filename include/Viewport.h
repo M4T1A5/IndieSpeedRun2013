@@ -19,10 +19,14 @@ public:
 	void draw(EGEMath::Text* text);
 	void renderSprites();
 	void close();
-
+	Vector getWindowSize();
+	Vector getCameraPosition();
+	void setCameraPosition(const Vector Position);
 private:
 	sf::RenderWindow* m_window;
 	std::vector<sf::Drawable*> m_objects[LAYER_COUNT + 1];
+	sf::View m_uiView;
+	sf::View m_mapView;
 };
 
 }
