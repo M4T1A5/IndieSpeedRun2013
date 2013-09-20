@@ -6,8 +6,8 @@ class Map
 public:
 	Map();
 	~Map();
-	Update();
-	Draw();
+	void Update();
+	void Draw();
 private:
 
 };
