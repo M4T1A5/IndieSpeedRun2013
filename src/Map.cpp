@@ -11,7 +11,9 @@ Map::Map()
 	textures["forest"] = new Texture("forest.png");
 	textures["swamp"] = new Texture("swamp.png");
 	textures["character"] = new Texture("arke_sheet.png");
+	textures["volcano"] = new Texture("volcano.png");
 	AddElement(MapElements::Background);
+	AddElement(MapElements::Volcano,Vector(1250,450));
 }
 
 
@@ -55,7 +57,7 @@ void Map::AddElement(MapElements mapElement, Vector pos)
 		gameObject->setPosition(Vector(pos.x, pos.y - 200));
 		gameObject->SetTarget(pos);
 		gameObject->setOriginPoint(5);
-		gameObject->setScale(1.0f);
+		gameObject->setScale(0.7f);
 		gameObjects.push_back(gameObject);
 		}
 		break;
@@ -79,6 +81,15 @@ void Map::AddElement(MapElements mapElement, Vector pos)
 		gameObject->SetTarget(pos);
 		gameObject->setOriginPoint(5);
 		gameObject->setScale(0.1f);
+		gameObjects.push_back(gameObject);
+		}
+		break;
+	case MapElements::Volcano:
+		{
+		auto gameObject = new GameObject(textures["volcano"]);
+		gameObject->setPosition(Vector(pos.x, pos.y - 200));
+		gameObject->setOriginPoint(5);
+		gameObject->setScale(0.6f);
 		gameObjects.push_back(gameObject);
 		}
 		break;

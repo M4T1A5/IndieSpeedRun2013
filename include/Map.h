@@ -17,7 +17,8 @@ public:
 		Background, // Actual Map
 		Forest,
 		Swamp,
-		Character
+		Character,
+		Volcano
 	};
 
 	Map();
