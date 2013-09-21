@@ -2,9 +2,9 @@
 #include <iostream>
 #define LAYER_COUNT 300
 
-namespace EGEMath
+namespace EGEMotor
 {
-
+using namespace EGEMath;
 // Font
 Font::Font()
 {
@@ -31,7 +31,7 @@ Text::Text()
 {
 	m_text = new sf::Text();
 }
-Text::Text(const std::string string, EGEMath::Font* font, unsigned int CharacterSize)
+Text::Text(const std::string string, EGEMotor::Font* font, unsigned int CharacterSize)
 	: m_layer(0),
 	  m_originPoint(0)
 {
@@ -47,7 +47,7 @@ Text::~Text()
 	std::cout<<"done"<<std::endl;
 #endif
 }
-void Text::setFont(EGEMath::Font* font)
+void Text::setFont(EGEMotor::Font* font)
 {
 	m_text->setFont(*(font->m_font));
 }

@@ -1,8 +1,9 @@
 #include <Viewport.h>
 #include <iostream>
 
-namespace EGEMath
+namespace EGEMotor
 {
+using namespace EGEMath;
 
 Viewport::Viewport(sf::RenderWindow* window)
 	: m_window(window),
@@ -12,11 +13,11 @@ Viewport::Viewport(sf::RenderWindow* window)
 }
 Viewport::~Viewport()
 {}
-void Viewport::draw(EGEMath::Sprite* sprite)
+void Viewport::draw(EGEMotor::Sprite* sprite)
 {
 	m_objects[sprite->m_layer].push_back(sprite->m_sprite);
 }
-void Viewport::draw(EGEMath::Text* text)
+void Viewport::draw(EGEMotor::Text* text)
 {
 	m_objects[text->m_layer].push_back(text->m_text);
 }

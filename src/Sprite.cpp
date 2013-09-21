@@ -2,9 +2,9 @@
 #include <iostream>
 #define LAYER_COUNT 300
 
-namespace EGEMath
+namespace EGEMotor
 {
-
+using namespace EGEMath;
 Texture::Texture()
 	: m_texture(NULL)
 {}
@@ -40,7 +40,7 @@ Sprite::Sprite()
 {
 	m_sprite = new sf::Sprite();
 }
-Sprite::Sprite(EGEMath::Texture *texture)
+Sprite::Sprite(EGEMotor::Texture *texture)
 	: m_layer(0),
 	  m_originPoint(0)
 {

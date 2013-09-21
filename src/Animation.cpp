@@ -4,7 +4,7 @@
 
 
 
-Animation::Animation(EGEMath::Sprite *sprite, int Frames, int FramesizeX, int FramesizeY, float Fps, int FirstFrame, bool Loop)
+Animation::Animation(EGEMotor::Sprite *sprite, int Frames, int FramesizeX, int FramesizeY, float Fps, int FirstFrame, bool Loop)
 {
 	m_loop = Loop;
 	m_sprite = sprite;

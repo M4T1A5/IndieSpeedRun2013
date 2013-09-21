@@ -5,7 +5,7 @@
 #include <iostream>
 #include <Viewport.h>
 
-namespace EGEMath
+namespace EGEMotor
 {
 
 const enum Button
@@ -19,7 +19,7 @@ const enum Button
 class Input
 {
 public:
-	Input(EGEMath::Viewport* viewport);
+	Input(EGEMotor::Viewport* viewport);
 	~Input();
 
 	
@@ -28,19 +28,19 @@ public:
 
 	//vector getAbsoluteMousePosition();
 	
-	Vector getMousePositionOnMap();
-	Vector getMousePosition();
+	EGEMath::Vector getMousePositionOnMap();
+	EGEMath::Vector getMousePosition();
 
 	//void setAbsoluteMousePosition(const vector& position);
 
-	void setMousePosition(const Vector& position);
+	void setMousePosition(const EGEMath::Vector& position);
 
 	bool active;
 private:
 	
 	bool isButtonDown(Button button, bool onPressOnly);
 
-	EGEMath::Viewport* m_viewport;
+	EGEMotor::Viewport* m_viewport;
 	bool isReleased[Button::ButtonCount];
 	bool ML,MR,MM; // is button released
 };

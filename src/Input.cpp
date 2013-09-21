@@ -1,8 +1,9 @@
 #include <Input.h>
 
 using namespace EGEMath;
+using namespace EGEMotor;
 
-Input::Input(EGEMath::Viewport* viewport)
+Input::Input(EGEMotor::Viewport* viewport)
 	: active(true),
 	  m_viewport(viewport)
 {

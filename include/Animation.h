@@ -7,7 +7,7 @@
 class Animation
 {
 public:
-	Animation(EGEMath::Sprite *sprite, int Frames, int FramesizeX, int FramesizeY, float Fps= (5.0f), int FirstFrame = 0, bool Loop = true);
+	Animation(EGEMotor::Sprite *sprite, int Frames, int FramesizeX, int FramesizeY, float Fps= (5.0f), int FirstFrame = 0, bool Loop = true);
 	~Animation();
 	void Update(float deltaTime);
 	void ChangeAnimation(int FirstFrameofLoop, int FramesinLoop);
@@ -16,7 +16,7 @@ public:
 private:
 	void setVisibleFrame();
 
-	EGEMath::Sprite* m_sprite;
+	EGEMotor::Sprite* m_sprite;
 
 	float m_timer;
 	int m_currentFrame;

@@ -1,6 +1,7 @@
 #include <Map.h>
 
 using namespace EGEMath;
+using namespace EGEMotor;
 
 Map::Map()
 {

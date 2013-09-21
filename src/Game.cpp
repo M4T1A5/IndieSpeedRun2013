@@ -1,6 +1,7 @@
 #include <Game.h>
 
 using namespace EGEMath;
+using namespace EGEMotor;
 
 Game::Game(Camera& camera, Viewport& viewport, Input &input)
 	: input(&input),
@@ -33,7 +34,7 @@ void Game::Update(const double& dt)
 	}
 }
 
-void Game::Draw(EGEMath::Viewport& viewport)
+void Game::Draw(EGEMotor::Viewport& viewport)
 {
 	map.Draw(viewport);
 	viewport.renderSprites();

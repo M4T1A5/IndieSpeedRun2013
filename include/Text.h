@@ -5,7 +5,7 @@
 #include <EGEMath\Vector.h>
 #include <EGEMath\Rectangle.h>
 
-namespace EGEMath
+namespace EGEMotor
 {
 
 class Font
@@ -25,9 +25,9 @@ class Text
 {
 public:
 	Text();
-	Text(const std::string string, EGEMath::Font* font, unsigned int CharacterSize = 30);
+	Text(const std::string string, EGEMotor::Font* font, unsigned int CharacterSize = 30);
 	~Text();
-	void setFont(EGEMath::Font* font);
+	void setFont(EGEMotor::Font* font);
 	void setString(std::string string);
 	void setCharacterSize(unsigned int CharacterSize = 30);
 
@@ -39,16 +39,16 @@ public:
 	void updateOrigin();
 	void setScale(float ScaleX, float ScaleY);
 	void setScale(float Scale);
-	void setScale(Vector Scale);
+	void setScale(EGEMath::Vector Scale);
 	/*Layer 0-5 game items, 10-290 pickups, 295-300 menu items*/
 	void setLayer(int Layer);
 
-	Vector getPosition();
-	Vector getOrigin();
-	Vector getScale();
-	Vector getSize();
-	Vector getTransformedSize();
-	Rectangle getGlobalBounds();
+	EGEMath::Vector getPosition();
+	EGEMath::Vector getOrigin();
+	EGEMath::Vector getScale();
+	EGEMath::Vector getSize();
+	EGEMath::Vector getTransformedSize();
+	EGEMath::Rectangle getGlobalBounds();
 
 private:
 	Text(Text& text);

@@ -5,7 +5,7 @@
 #include <EGEMath\Vector.h>
 #include <EGEMath\Rectangle.h>
 
-namespace EGEMath
+namespace EGEMotor
 {
 
 class Texture
@@ -27,11 +27,11 @@ class Sprite
 {
 public:
 	Sprite();
-	Sprite(EGEMath::Texture* texture);
+	Sprite(EGEMotor::Texture* texture);
 	~Sprite();
-	void setTexture(EGEMath::Texture* texture);
-	void setTextureRectangle(Rectangle rectangle);
-	Vector getTextureSize();
+	void setTexture(EGEMotor::Texture* texture);
+	void setTextureRectangle(EGEMath::Rectangle rectangle);
+	EGEMath::Vector getTextureSize();
 
 	void setColor(unsigned int Red, unsigned int Green, unsigned int Blue, unsigned int alpha);
 	void setPosition(EGEMath::Vector Position);
@@ -42,18 +42,18 @@ public:
 	void updateOrigin();
 	void setScale(float ScaleX, float ScaleY);
 	void setScale(float Scale);
-	void setScale(Vector Scale);
+	void setScale(EGEMath::Vector Scale);
 	/*Layer 0-5 game items, 10-290 pickups, 295-300 menu items*/
 	void setLayer(int Layer);
 	//Vector getColor(); lets make this later...
-	Vector getPosition();
-	Vector getOrigin();
-	Vector getScale();
+	EGEMath::Vector getPosition();
+	EGEMath::Vector getOrigin();
+	EGEMath::Vector getScale();
 	//Returns size after cropping, before scaling
-	Vector getSize();
+	EGEMath::Vector getSize();
 	//Returns size after cropping and scaling
-	Vector getTransformedSize();
-	Rectangle getGlobalBounds();
+	EGEMath::Vector getTransformedSize();
+	EGEMath::Rectangle getGlobalBounds();
 
 private:
 	Sprite(Sprite& sprite);

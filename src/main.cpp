@@ -10,9 +10,9 @@
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1280,720), "I dont even");
-	EGEMath::Viewport viewport(&window);
-	EGEMath::Input input(&viewport);
-	EGEMath::Camera camera(input,viewport);
+	EGEMotor::Viewport viewport(&window);
+	EGEMotor::Input input(&viewport);
+	EGEMotor::Camera camera(input,viewport);
 	Game game(camera, viewport, input);
 
 	// Deltatime

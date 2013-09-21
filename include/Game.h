@@ -15,16 +15,16 @@ public:
 		PLAY,
 		PAUSE
 	};
-	Game(EGEMath::Camera& camera, EGEMath::Viewport& viewport, EGEMath::Input &input);
+	Game(EGEMotor::Camera& camera, EGEMotor::Viewport& viewport, EGEMotor::Input &input);
 	~Game();
 
 	void Update(const double& dt);
-	void Draw(EGEMath::Viewport& viewport);	
+	void Draw(EGEMotor::Viewport& viewport);	
 private:
 	Map map;
-	EGEMath::Input* input;
-	EGEMath::Camera* camera;
-	EGEMath::Viewport* viewport;
+	EGEMotor::Input* input;
+	EGEMotor::Camera* camera;
+	EGEMotor::Viewport* viewport;
 };
 
 #endif

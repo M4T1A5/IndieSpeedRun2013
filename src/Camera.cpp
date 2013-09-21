@@ -1,8 +1,9 @@
 #include <Camera.h>
 
 using namespace EGEMath;
+using namespace EGEMotor;
 
-Camera::Camera(EGEMath::Input& input, EGEMath::Viewport& viewport)
+Camera::Camera(EGEMotor::Input& input, EGEMotor::Viewport& viewport)
 	: m_input(&input),
 	  m_viewport(&viewport)
 {

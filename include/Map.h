@@ -21,13 +21,13 @@ public:
 	~Map();
 	//void LoadMap(std::string fileName);
 	void Update();
-	void Draw(EGEMath::Viewport& viewport);
+	void Draw(EGEMotor::Viewport& viewport);
 	void AddElement(MapElements mapElement);
 	sf::Color GetPixel(EGEMath::Vector pos);
 private:
 	sf::Image mapImage;
-	std::vector<EGEMath::Sprite*> sprites;
-	std::map<std::string, EGEMath::Texture*> textures;
+	std::vector<EGEMotor::Sprite*> sprites;
+	std::map<std::string, EGEMotor::Texture*> textures;
 
 	EGEMath::Vector size;
 };

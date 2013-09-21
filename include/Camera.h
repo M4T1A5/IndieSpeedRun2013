@@ -3,20 +3,20 @@
 #include <Viewport.h>
 #include <Input.h>
 
-namespace EGEMath
+namespace EGEMotor
 {
 
 class Camera
 {
 public:
-	Camera(EGEMath::Input& input, EGEMath::Viewport& viewport);
+	Camera(EGEMotor::Input& input, EGEMotor::Viewport& viewport);
 	~Camera();
 	void FollowMouse(const double& dt);
 	void MoveTo(EGEMath::Vector MapCoordinate);
 private:
 	Camera(Camera& camera);
-	EGEMath::Input* m_input;
-	EGEMath::Viewport* m_viewport;
+	EGEMotor::Input* m_input;
+	EGEMotor::Viewport* m_viewport;
 };
 
 }
