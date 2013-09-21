@@ -9,21 +9,29 @@ class GameObject
 {
 public:
 	GameObject();
-	GameObject(EGEMath::Vector spawnPos);
+	GameObject(EGEMotor::Texture* texture);
 	virtual ~GameObject();
 
 	virtual void Draw(EGEMotor::Viewport& viewport);
 	virtual void Update(const double& dt);
 
-	EGEMath::Vector GetPosition();
 	void SetTarget(EGEMath::Vector target);
+	void ResetTarget();
+
 	void SetDirection(EGEMath::Vector direction);
 	void SetPosition(EGEMath::Vector position);
+	EGEMath::Vector GetPosition();
+	
+	void SetSpeed(float speed);
+	float GetSpeed();
+
 	void SetLayer(unsigned int layer);
 	unsigned int GetLayer();
 
 private:
 	virtual void move(const double& dt);
+
+	float _speed;
 
 	EGEMotor::Sprite _sprite;
 	// Either move by a target or a normalized direction vector

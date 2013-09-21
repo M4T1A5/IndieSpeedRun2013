@@ -6,6 +6,7 @@ using namespace EGEMotor;
 Map::Map()
 {
 	mapImage.loadFromFile("assets/map.png"); // For pixel checking
+	size = mapImage.getSize();
 	textures["map"] = new Texture("map.png");
 	textures["forest"] = new Texture("forest.png");
 	textures["swamp"] = new Texture("swamp.png");
@@ -16,34 +17,33 @@ Map::Map()
 Map::~Map()
 {
 	textures.empty();
-	sprites.empty();
+	gameObjects.empty();
 }
 
-void Map::Update()
+void Map::Update(const double& dt)
 {
-
+	for(size_t i = 0; i < gameObjects.size(); ++i)
+	{
+		gameObjects[i]->Update(dt);
+	}
 }
 
 void Map::Draw(Viewport& viewport)
 {
-	for(size_t i = 0; i < sprites.size(); ++i)
+	for(size_t i = 0; i < gameObjects.size(); ++i)
 	{
-		viewport.draw(sprites[i]);
+		gameObjects[i]->Draw(viewport);
 	}
 }
 
-void Map::AddElement(MapElements mapElement)
+void Map::AddElement(MapElements mapElement, Vector pos)
 {
 	std::string elementName;
 	switch(mapElement)
 	{
 	// Special case
 	case MapElements::Background:
-		{
-		Sprite* map = new Sprite(textures["map"]);
-		size = map->getTextureSize();
-		sprites.push_back(map);
-		}
+		elementName = "map";
 		break;
 	case MapElements::Forest:
 		elementName = "forest";
@@ -52,8 +52,13 @@ void Map::AddElement(MapElements mapElement)
 		elementName = "swamp";
 		break;
 	}
-	if(elementName != "")
-		sprites.push_back(new Sprite(textures[elementName]));
+	// Add a new gameobject with correct texture
+	auto gameObject = new GameObject(textures[elementName]);
+	gameObject->SetSpeed(2);
+	gameObject->SetPosition(Vector(pos.x, pos.y - 200));
+	gameObject->SetTarget(pos);
+
+	gameObjects.push_back(gameObject);
 }
 
 sf::Color Map::GetPixel(Vector pos)
