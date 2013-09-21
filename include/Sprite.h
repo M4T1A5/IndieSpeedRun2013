@@ -49,7 +49,9 @@ public:
 	Vector getPosition();
 	Vector getOrigin();
 	Vector getScale();
+	//Returns size after cropping, before scaling
 	Vector getSize();
+	//Returns size after cropping and scaling
 	Vector getTransformedSize();
 	Rectangle getGlobalBounds();
 

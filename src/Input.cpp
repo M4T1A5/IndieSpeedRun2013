@@ -4,11 +4,10 @@ using namespace EGEMath;
 
 Input::Input(EGEMath::Viewport* viewport)
 	: active(true),
-	  m_viewport(viewport),
-	  ML(false),
-	  MR(false),
-	  MM(false)
+	  m_viewport(viewport)
 {
+	for (int i=0;i<ButtonCount;++i)
+		isReleased[i]=false;
 }
 
 Input::~Input(){}
@@ -32,20 +31,42 @@ bool Input::isButtonDown(Button button, bool onPressOnly)
 			{
 				if (!onPressOnly) // down-function
 					return true; 
-				else if (ML) // pressed-function
+				else if (isReleased[sf::Mouse::Left]) // pressed-function
 				{
-					ML = false; // button is not released anymore
+					isReleased[sf::Mouse::Left] = false; // button is not released anymore
 					return true; // but it was released
 				}
 			}
 			else
-				ML = true; // button is released
+				isReleased[sf::Mouse::Left] = true; // button is released
 			break;
 		case MouseRight:
-			return sf::Mouse::isButtonPressed(sf::Mouse::Right);
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+			{
+				if (!onPressOnly) // down-function
+					return true; 
+				else if (isReleased[sf::Mouse::Right]) // pressed-function
+				{
+					isReleased[sf::Mouse::Right] = false; // button is not released anymore
+					return true; // but it was released
+				}
+			}
+			else
+				isReleased[sf::Mouse::Left] = true; // button is released
 			break;
 		case MouseMiddle:
-			return sf::Mouse::isButtonPressed(sf::Mouse::Middle);
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Middle))
+			{
+				if (!onPressOnly) // down-function
+					return true; 
+				else if (isReleased[sf::Mouse::Middle]) // pressed-function
+				{
+					isReleased[sf::Mouse::Middle] = false; // button is not released anymore
+					return true; // but it was released
+				}
+			}
+			else
+				isReleased[sf::Mouse::Left] = true; // button is released
 			break;
 		default:
 #if _DEBUG
@@ -84,8 +105,8 @@ Vector Input::getMousePosition()
 //	sf::Mouse::setPosition(pos);
 //}
 //	
-//void Input::setMousePosition(const vector& position)
-//{
-//	sf::Vector2i pos(position.x, position.y);
-//	sf::Mouse::setPosition(pos,*window);
-//}
+void Input::setMousePosition(const Vector& position)
+{
+	sf::Vector2i pos(position.x, position.y);
+	sf::Mouse::setPosition(pos,*m_viewport->m_window);
+}
