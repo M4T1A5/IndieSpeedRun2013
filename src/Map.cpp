@@ -16,7 +16,7 @@ Map::Map()
 	textures["volcano"] = new Texture("volcano.png");
 	CreateMapElements();
 	AddElement(MapElements::Background);
-	AddElement(MapElements::Volcano,Vector(1250,450));
+	AddElement(MapElements::Volcano,Vector(1800,450));
 }
 
 
@@ -96,5 +96,5 @@ void Map::CreateMapElements()
 		0, 0, 1.0f));
 
 	_mapElementList.push_back(new MapElement(	MapElements::Character, textures["character"],
-		5, 150, 0.1f, 4, 4));
+		5, 150, 0.5f, 4, 4));
 }

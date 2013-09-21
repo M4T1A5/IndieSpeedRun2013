@@ -24,7 +24,7 @@ void Camera::MoveTo(Vector pos)
 	int side	= m_viewport->getWindowSize().x/2;
 	int updown	= m_viewport->getWindowSize().y/2;
 
-	std::cout << "X: " << pos.x << "Y: " << pos.y << std::endl;
+	//std::cout << "X: " << pos.x << "Y: " << pos.y << std::endl;
 
 	if(pos.x < side)
 		pos.x = side;
