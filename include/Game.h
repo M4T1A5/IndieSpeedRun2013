@@ -5,6 +5,8 @@
 #include <Map.h>
 #include <Input.h>
 #include <Camera.h>
+#include <Village.h>
+#include <Explorer.h>
 
 class Game
 {
@@ -27,6 +29,16 @@ private:
 	EGEMotor::Camera* camera;
 	EGEMotor::Viewport* viewport;
 	GameState gameState;
+
+	EGEMotor::Texture _townTexture;
+	EGEMotor::Texture _villageTexture;
+	EGEMotor::Texture _explorerTexture;
+	std::vector<Village*> _villages;
+	std::vector<Explorer*> _explorers;
+	
+	float Difficulty;
+	float _clock;
+
 };
 
 #endif

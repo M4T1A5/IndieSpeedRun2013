@@ -34,6 +34,7 @@ private:
 
 	EGEMath::Vector size;
 	std::vector<MapElement*> _mapElementList;
+	friend class Game;
 };
 
 #endif

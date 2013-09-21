@@ -1,4 +1,5 @@
 #include <Game.h>
+#include <time.h>
 
 using namespace EGEMath;
 using namespace EGEMotor;
@@ -6,9 +7,16 @@ using namespace EGEMotor;
 Game::Game(Viewport& viewport, Input &input)
 	: input(&input),
 	  viewport(&viewport),
-	  gameState(MENU)
+	  gameState(MENU),
+	  _clock(0),
+	  Difficulty(1)
 {
+	srand(time(NULL));
 	camera = new Camera(input, viewport, map.GetSize());
+	_townTexture.loadTexture("village.png");
+	//_villageTexture.loadTexture("");
+	_explorerTexture.loadTexture("arke_stand.png");
+	_villages.push_back(new Village(&_townTexture,Vector(300,800)));
 }
 
 
@@ -28,9 +36,13 @@ void Game::Update(const double& dt)
 	{
 	case MENU:
 		if (true)
-			gameState = WARMUP;
+			gameState = PLAY;
 		break;
+		break;
+	case PLAY:
 	case WARMUP:
+		_clock += dt;
+
 		if((windowSize.x - mousePos.x) < 100 || mousePos.x < 100)
 		{
 			camera->FollowMouse(dt);
@@ -46,10 +58,32 @@ void Game::Update(const double& dt)
 		}
 		else if(input->isButtonPressed(Button::MouseRight))
 		{
-			map.AddElement(Character, input->getMousePositionOnMap());
+			map.AddElement(Swamp, input->getMousePositionOnMap());
 		}
-		break;
-	case PLAY:
+
+		if (_clock > 30)
+		{
+			_clock=0;
+			gameState = PLAY;
+		}
+
+		for (int i=0; i<_villages.size(); ++i)
+		{
+			_villages[i]->Update(dt);
+			if (_villages[i]->Clock > _villages[i]->NextVillager)
+			{
+				_villages[i]->Clock -= _villages[i]->NextVillager;
+				_explorers.push_back(new Explorer(&_explorerTexture,16,4,4,12,_villages[i]->getPosition()));
+				_villages[i]->NextVillager = rand()%100/Difficulty;
+			}
+		}
+		
+		for (int i=0; i<_explorers.size(); ++i)
+		{
+			_explorers[i]->Update(dt, map._mapElements[Volcano][0]->getPosition());
+		}
+
+
 		break;
 	case PAUSE:
 		break;
@@ -68,6 +102,10 @@ void Game::Draw(EGEMotor::Viewport& viewport)
 	case WARMUP:
 	case PLAY:
 		map.Draw(viewport);
+		for (int i=0;i<_villages.size();++i)
+			_villages[i]->Draw(viewport);
+		for (int i=0;i<_explorers.size();++i)
+			_explorers[i]->Draw(viewport);
 		viewport.renderSprites();
 		break;
 	}

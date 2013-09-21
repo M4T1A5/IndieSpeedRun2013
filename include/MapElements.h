@@ -19,7 +19,7 @@ enum MapElements
 	Forest,
 	Swamp,
 	Volcano,
-	Character,
+	//Character,
 	MapElementCount
 };
 
@@ -49,19 +49,6 @@ public:
 	~Element();
 private:
 	MapElement* _mapElement;
-};
-
-
-
-
-
-
-class Character : public AnimatedGameObject
-{
-public:
-	Character();
-	~Character();
-
 };
 
 #endif
