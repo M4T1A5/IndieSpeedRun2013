@@ -32,6 +32,13 @@ void Game::Update(const double& dt)
 	{
 		camera->FollowMouse(dt);
 	}
+
+	if(input->isButtonPressed(Button::MouseLeft))
+	{
+		map.AddElement(map.Forest, input->getMousePositionOnMap());
+	}
+
+	map.Update(dt);
 }
 
 void Game::Draw(EGEMotor::Viewport& viewport)
