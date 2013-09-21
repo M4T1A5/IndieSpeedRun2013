@@ -4,6 +4,7 @@ using namespace EGEMath;
 
 Map::Map()
 {
+	mapImage.loadFromFile("assets/map.png"); // For pixel checking
 	textures["map"] = new Texture("map.png");
 	textures["forest"] = new Texture("forest.png");
 	textures["swamp"] = new Texture("swamp.png");
@@ -52,4 +53,9 @@ void Map::AddElement(MapElements mapElement)
 	}
 	if(elementName != "")
 		sprites.push_back(new Sprite(textures[elementName]));
+}
+
+sf::Color Map::GetPixel(Vector pos)
+{
+	return mapImage.getPixel(pos.x, pos.y);
 }
