@@ -25,8 +25,12 @@ public:
 	//void LoadMap(std::string fileName);
 	void Update(const double& dt);
 	void Draw(EGEMotor::Viewport& viewport);
+
 	void AddElement(MapElements mapElement, EGEMath::Vector pos = EGEMath::Vector());
+
 	sf::Color GetPixel(EGEMath::Vector pos);
+
+	EGEMath::Vector GetSize() { return size; }
 private:
 	sf::Image riverImage;
 	std::vector<GameObject*> gameObjects;

@@ -1,11 +1,13 @@
 #include <Camera.h>
+#include <iostream>
 
 using namespace EGEMath;
 using namespace EGEMotor;
 
-Camera::Camera(EGEMotor::Input& input, EGEMotor::Viewport& viewport)
+Camera::Camera(Input& input, Viewport& viewport, Vector mapSize)
 	: m_input(&input),
-	  m_viewport(&viewport)
+	  m_viewport(&viewport),
+	  m_mapSize(mapSize)
 {
 }
 Camera::~Camera()
@@ -22,15 +24,16 @@ void Camera::MoveTo(Vector pos)
 	int side	= m_viewport->getWindowSize().x/2;
 	int updown	= m_viewport->getWindowSize().y/2;
 
+	std::cout << "X: " << pos.x << "Y: " << pos.y << std::endl;
+
 	if(pos.x < side)
 		pos.x = side;
+	else if(pos.x > m_mapSize.x - side)
+		pos.x = m_mapSize.x - side;
 	if(pos.y < updown)
 		pos.y = updown;
-
-	/*if(pos.x < right)
-		pos.x = right;
-	if(pos.y < bottom)
-		pos.y = bottom;*/
+	else if(pos.y > m_mapSize.y - updown)
+		pos.y = m_mapSize.y - updown;
 
 	m_viewport->setCameraPosition(pos);
 }

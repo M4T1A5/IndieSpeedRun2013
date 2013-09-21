@@ -12,8 +12,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(1280,720), "I dont even");
 	EGEMotor::Viewport viewport(&window);
 	EGEMotor::Input input(&viewport);
-	EGEMotor::Camera camera(input,viewport);
-	Game game(camera, viewport, input);
+	Game game(viewport, input);
 
 	// Deltatime
 	sf::Clock clock;
