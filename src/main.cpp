@@ -13,7 +13,7 @@ int main()
 	EGEMath::Viewport viewport(&window);
 	EGEMath::Input input(&viewport);
 	EGEMath::Camera camera(input,viewport);
-	Game game(input);
+	Game game(camera, viewport, input);
 
 	// Deltatime
 	sf::Clock clock;
@@ -31,12 +31,8 @@ int main()
 		
 		std::cout<<"\n"<<input.getMousePosition()<<input.getMousePositionOnMap();
 
-		if (input.isButtonDown(EGEMath::MouseLeft))
-		{
-			camera.FollowMouse();
-		}
 
-        window.clear();
+		window.clear();
 		game.Draw(viewport);
         window.display();
 		dt = clock.restart().asMicroseconds() / 1000000.0;

@@ -1,6 +1,7 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include <EGEMath/Vector.h>
 #include <Sprite.h>
 #include <Viewport.h>
 #include <string>
@@ -10,7 +11,7 @@ class Map
 public:
 	enum MapElements
 	{
-		Background,
+		Background, // Actual Map
 		Forest,
 		Swamp
 	};
@@ -24,6 +25,8 @@ public:
 private:
 	std::vector<EGEMath::Sprite*> sprites;
 	std::map<std::string, EGEMath::Texture*> textures;
+
+	EGEMath::Vector size;
 };
 
 #endif

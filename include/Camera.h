@@ -11,7 +11,7 @@ class Camera
 public:
 	Camera(EGEMath::Input& input, EGEMath::Viewport& viewport);
 	~Camera();
-	void FollowMouse();
+	void FollowMouse(const double& dt);
 	void MoveTo(EGEMath::Vector MapCoordinate);
 private:
 	Camera(Camera& camera);

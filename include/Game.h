@@ -4,6 +4,7 @@
 #include <Viewport.h>
 #include <Map.h>
 #include <Input.h>
+#include <Camera.h>
 
 class Game
 {
@@ -14,7 +15,7 @@ public:
 		PLAY,
 		PAUSE
 	};
-	Game(EGEMath::Input &input);
+	Game(EGEMath::Camera& camera, EGEMath::Viewport& viewport, EGEMath::Input &input);
 	~Game();
 
 	void Update(const double& dt);
@@ -22,6 +23,8 @@ public:
 private:
 	Map map;
 	EGEMath::Input* input;
+	EGEMath::Camera* camera;
+	EGEMath::Viewport* viewport;
 };
 
 #endif

@@ -4,7 +4,7 @@ using namespace EGEMath;
 
 Map::Map()
 {
-	textures["background"] = new Texture("map.png");
+	textures["map"] = new Texture("map.png");
 	textures["forest"] = new Texture("forest.png");
 	textures["swamp"] = new Texture("swamp.png");
 	AddElement(MapElements::Background);
@@ -14,6 +14,7 @@ Map::Map()
 Map::~Map()
 {
 	textures.empty();
+	sprites.empty();
 }
 
 void Map::Update()
@@ -34,8 +35,13 @@ void Map::AddElement(MapElements mapElement)
 	std::string elementName;
 	switch(mapElement)
 	{
+	// Special case
 	case MapElements::Background:
-		elementName = "background";
+		{
+		Sprite* map = new Sprite(textures["map"]);
+		size = map->getTextureSize();
+		sprites.push_back(map);
+		}
 		break;
 	case MapElements::Forest:
 		elementName = "forest";
@@ -44,5 +50,6 @@ void Map::AddElement(MapElements mapElement)
 		elementName = "swamp";
 		break;
 	}
-	sprites.push_back(new Sprite(textures[elementName]));
+	if(elementName != "")
+		sprites.push_back(new Sprite(textures[elementName]));
 }
