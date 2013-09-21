@@ -7,7 +7,6 @@
 class AnimatedGameObject : public GameObject
 {
 public:
-	AnimatedGameObject();
 	AnimatedGameObject(EGEMotor::Texture* spriteSheet, int Frames, int FramesizeX, int FramesizeY,
 		float Fps= (5.0f), int FirstFrame = 0, bool Loop = true);
 	~AnimatedGameObject();

@@ -37,7 +37,7 @@ protected:
 
 	float _speed;
 
-	EGEMotor::Sprite _sprite;
+	EGEMotor::Sprite* _sprite;
 	// Either move by a target or a normalized direction vector
 	EGEMath::Vector _curPos, _targetPos, _direction;
 };

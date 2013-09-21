@@ -39,7 +39,7 @@ void Game::Update(const double& dt)
 	}
 	else if(input->isButtonPressed(Button::MouseRight))
 	{
-		map.AddElement(map.Swamp, input->getMousePositionOnMap());
+		map.AddElement(map.Character, input->getMousePositionOnMap());
 	}
 
 	map.Update(dt);
