@@ -24,6 +24,11 @@ public:
 	void Update(const double& dt);
 	void Draw(EGEMotor::Viewport& viewport);	
 private:
+	// Menu crap
+	EGEMotor::Texture *menuTexture, *startTexture;
+	GameObject menu;
+	GUIButton* startButton;
+
 	Map map;
 	EGEMotor::Input* input;
 	EGEMotor::Camera* camera;

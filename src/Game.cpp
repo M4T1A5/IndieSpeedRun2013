@@ -10,6 +10,15 @@ Game::Game(Viewport& viewport, Input &input)
 {
 	camera = new Camera(input, viewport, map.GetSize());
 
+	// Menu
+	menuTexture = new Texture("menu.png");
+	menu.setTexture(menuTexture);
+	startTexture = new Texture("startbutton.png");
+	startButton = new GUIButton(startTexture, viewport.getWindowSize() / 2, 
+		Rectangle(Vector(), startTexture->getTextureSize()), &input);
+	startButton->setOriginPoint(5);
+
+
 	// Sidebar
 	sidebarTexture = new Texture("sidebar.png");
 	sidebar.setTexture(sidebarTexture);
@@ -32,7 +41,13 @@ Game::Game(Viewport& viewport, Input &input)
 
 Game::~Game()
 {
+	delete startTexture;
+	delete startButton;
+	delete menuTexture;
+	delete sidebarTexture;
+	delete buttonTexture;
 
+	buttons.empty();
 }
 
 
@@ -45,7 +60,7 @@ void Game::Update(const double& dt)
 	switch (gameState)
 	{
 	case MENU:
-		if (true)
+		if (startButton->isPressed())
 			gameState = WARMUP;
 		break;
 	case WARMUP:
@@ -88,6 +103,9 @@ void Game::Draw(EGEMotor::Viewport& viewport)
 	switch (gameState)
 	{
 	case MENU:
+		menu.Draw(viewport);
+		startButton->draw(viewport);
+		viewport.renderSprites();
 		break;
 	case PAUSE:
 	case WARMUP:
