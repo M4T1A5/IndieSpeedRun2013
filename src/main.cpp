@@ -4,12 +4,24 @@
 #include <Viewport.h>
 #include <Input.h>
 #include <Camera.h>
+#include <Windows.h>
 
 #include <iostream>
 
 int main()
 {
+
 	sf::RenderWindow window(sf::VideoMode(1280,720), "I dont even");
+
+	//window.setMouseCursorVisible(false);
+
+	//HWND hwnd = GetConsoleWindow();
+	//ShowWindow(hwnd, SW_HIDE);
+
+	//sf::Image icon;
+	//if (icon.loadFromFile("Assets/icon.png"))
+	//	window.setIcon(64,64,icon.getPixelsPtr());
+
 	EGEMotor::Viewport viewport(&window);
 	EGEMotor::Input input(&viewport);
 	EGEMotor::Camera camera(input,viewport);
@@ -36,22 +48,17 @@ int main()
 			case sf::Event::GainedFocus:
 				input.active = true;
 				break;
-			case sf::Event::MouseLeft:
-				if (input.active)
-					input.keepMouseInWindow();
-				break;
 			}
 
         }
-		if (input.active)
-		{
-			game.Update(dt);
 
-			window.clear();
-			game.Draw(viewport);
-			input.keepMouseInWindow();
-			window.display();
-		}
+		game.Update(dt);
+
+		window.clear();
+		game.Draw(viewport);
+		input.keepMouseInWindow();
+		window.display();
+
 		dt = clock.restart().asMicroseconds() / 1000000.0;
     }
 	
