@@ -1,12 +1,13 @@
 #include <Viewport.h>
+#include <iostream>
 
 namespace EGEMath
 {
 
 Viewport::Viewport(sf::RenderWindow* window)
 	: m_window(window),
-	  m_mapView(sf::Vector2f(0,0),sf::Vector2f(window->getSize())),
-	  m_uiView(sf::Vector2f(0,0),sf::Vector2f(window->getSize()))
+	  m_mapView(sf::Vector2f(window->getSize())/2.0f,sf::Vector2f(window->getSize())),
+	  m_uiView(sf::Vector2f(window->getSize())/2.0f,sf::Vector2f(window->getSize()))
 {
 }
 Viewport::~Viewport()
@@ -45,7 +46,7 @@ Vector Viewport::getCameraPosition()
 {
 	return m_mapView.getCenter();
 }
-void Viewport::setCameraPosition(const Vector Position)
+void Viewport::setCameraPosition(Vector Position)
 {
 	m_mapView.setCenter(Position.x,Position.y);
 }

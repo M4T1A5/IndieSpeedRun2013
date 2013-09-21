@@ -112,9 +112,6 @@ bool Vector::operator !=(const Vector& RightVal)
 	return true;
 }
 
-namespace al
-{
-
 Vector operator *(const Vector& LeftVal, const float RightVal)
 {
 	return Vector(LeftVal.x * RightVal,LeftVal.y * RightVal);
@@ -131,11 +128,14 @@ const Vector &operator *=(Vector& LeftVal, float RightVal)
 	return LeftVal;
 }
 
-//void operator <<(std::ostream& Ostr, const Vector RightVal)
-//{
-//    Ostr << "x:" << RightVal.x << ", y:" << RightVal.y << "";
-//}
-
+std::ostream& operator <<(std::ostream& Ostr, const Vector& RightVal)
+{
+    Ostr << "(";
+	Ostr << RightVal.x;
+	Ostr << ",";
+	Ostr << RightVal.y;
+	Ostr << ")";
+	return Ostr;
 }
 
 }
