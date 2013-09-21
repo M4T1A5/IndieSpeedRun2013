@@ -28,6 +28,21 @@ void GameObject::Update(const double& dt)
 	_sprite.setPosition(_curPos);
 }
 
+void GameObject::SetOrigin(EGEMath::Vector origin)
+{
+	_sprite.setOrigin(origin);
+}
+
+void GameObject::SetOriginPoint(int point)
+{
+	_sprite.setOriginPoint(point);
+}
+
+Vector GameObject::GetOrigin()
+{
+	return _sprite.getOrigin();
+}
+
 void GameObject::SetTarget(EGEMath::Vector target)
 {
 	_targetPos = target;
@@ -83,7 +98,14 @@ void GameObject::move(const double& dt)
 	if(_targetPos.getLenght() > 0)
 	{
 		_direction = _targetPos - _curPos;
-		//_direction.normalize()
+		_direction.Normalize();
 	}
-	_curPos += _direction * dt;
+	Vector move = _direction * dt * _speed;
+	_curPos += move;
+
+	if((_targetPos - _curPos).getLenght() < move.getLenght())
+	{
+		SetPosition(_targetPos);
+		SetSpeed(0);
+	}
 }
