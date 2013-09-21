@@ -37,6 +37,10 @@ void Game::Update(const double& dt)
 	{
 		map.AddElement(map.Forest, input->getMousePositionOnMap());
 	}
+	else if(input->isButtonPressed(Button::MouseRight))
+	{
+		map.AddElement(map.Character, input->getMousePositionOnMap());
+	}
 
 	map.Update(dt);
 }

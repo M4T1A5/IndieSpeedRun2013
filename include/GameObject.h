@@ -32,12 +32,12 @@ public:
 	void SetLayer(unsigned int layer);
 	unsigned int GetLayer();
 
-private:
+protected:
 	virtual void move(const double& dt);
 
 	float _speed;
 
-	EGEMotor::Sprite _sprite;
+	EGEMotor::Sprite* _sprite;
 	// Either move by a target or a normalized direction vector
 	EGEMath::Vector _curPos, _targetPos, _direction;
 };

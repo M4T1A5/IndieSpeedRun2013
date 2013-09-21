@@ -1,14 +1,15 @@
 #include <GameObject.h>
 
 using namespace EGEMath;
+using namespace EGEMotor;
 
 GameObject::GameObject()
 {
 }
 
 GameObject::GameObject(EGEMotor::Texture* texture)
-	: _sprite(texture)
 {
+	_sprite = new Sprite(texture);
 }
 
 GameObject::~GameObject()
@@ -19,28 +20,28 @@ GameObject::~GameObject()
 // Public
 void GameObject::Draw(EGEMotor::Viewport& viewport)
 {
-	viewport.draw(&_sprite);
+	viewport.draw(_sprite);
 }
 
 void GameObject::Update(const double& dt)
 {
 	move(dt);
-	_sprite.setPosition(_curPos);
+	_sprite->setPosition(_curPos);
 }
 
 void GameObject::SetOrigin(EGEMath::Vector origin)
 {
-	_sprite.setOrigin(origin);
+	_sprite->setOrigin(origin);
 }
 
 void GameObject::SetOriginPoint(int point)
 {
-	_sprite.setOriginPoint(point);
+	_sprite->setOriginPoint(point);
 }
 
 Vector GameObject::GetOrigin()
 {
-	return _sprite.getOrigin();
+	return _sprite->getOrigin();
 }
 
 void GameObject::SetTarget(EGEMath::Vector target)
@@ -83,7 +84,7 @@ float GameObject::GetSpeed()
 
 void GameObject::SetLayer(unsigned int layer)
 {
-	_sprite.setLayer(layer);
+	_sprite->setLayer(layer);
 }
 
 unsigned int GetLayer()

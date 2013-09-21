@@ -5,11 +5,12 @@ using namespace EGEMotor;
 
 Map::Map()
 {
-	mapImage.loadFromFile("assets/map.png"); // For pixel checking
-	size = mapImage.getSize();
+	riverImage.loadFromFile("assets/joet.png"); // For pixel checking
+	size = riverImage.getSize();
 	textures["map"] = new Texture("map.png");
 	textures["forest"] = new Texture("forest.png");
 	textures["swamp"] = new Texture("swamp.png");
+	textures["character"] = new Texture("arke_sheet.png");
 	AddElement(MapElements::Background);
 }
 
@@ -38,34 +39,50 @@ void Map::Draw(Viewport& viewport)
 
 void Map::AddElement(MapElements mapElement, Vector pos)
 {
-	std::string elementName;
 	switch(mapElement)
 	{
 	// Special case
 	case MapElements::Background:
-		elementName = "map";
+		{
+		auto gameObject = new GameObject(textures["map"]);
+		gameObjects.push_back(gameObject);
+		}
 		break;
 	case MapElements::Forest:
-		elementName = "forest";
-		break;
-	case MapElements::Swamp:
-		elementName = "swamp";
-		break;
-	}
-
-	auto gameObject = new GameObject(textures[elementName]);
-	if(elementName != "map")
-	{
-		// Add a new gameobject with correct texture		
+		{
+		auto gameObject = new GameObject(textures["forest"]);
 		gameObject->SetSpeed(300);
 		gameObject->SetPosition(Vector(pos.x, pos.y - 200));
 		gameObject->SetTarget(pos);
 		gameObject->SetOriginPoint(5);
+		gameObjects.push_back(gameObject);
+		}
+		break;
+	case MapElements::Swamp:
+		{
+		auto gameObject = new GameObject(textures["swamp"]);
+		gameObject->SetSpeed(300);
+		gameObject->SetPosition(Vector(pos.x, pos.y - 200));
+		gameObject->SetTarget(pos);
+		gameObject->SetOriginPoint(5);
+		gameObjects.push_back(gameObject);
+		}
+		break;
+	case MapElements::Character:
+		{
+		auto gameObject = 
+			new AnimatedGameObject(textures["character"], 16, 250, 450);
+		gameObject->SetSpeed(300);
+		gameObject->SetPosition(Vector(pos.x, pos.y - 200));
+		gameObject->SetTarget(pos);
+		gameObject->SetOriginPoint(5);
+		gameObjects.push_back(gameObject);
+		}
+		break;
 	}
-	gameObjects.push_back(gameObject);
 }
 
 sf::Color Map::GetPixel(Vector pos)
 {
-	return mapImage.getPixel(pos.x, pos.y);
+	return riverImage.getPixel(pos.x, pos.y);
 }
