@@ -1,7 +1,9 @@
 #include <Game.h>
 
+using namespace EGEMath;
 
-Game::Game()
+Game::Game(Input &input)
+	: input(&input)
 {
 
 }

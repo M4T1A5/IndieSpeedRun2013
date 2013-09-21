@@ -3,6 +3,7 @@
 
 #include <Viewport.h>
 #include <Map.h>
+#include <Input.h>
 
 class Game
 {
@@ -13,14 +14,14 @@ public:
 		PLAY,
 		PAUSE
 	};
-
-	Game();
+	Game(EGEMath::Input &input);
 	~Game();
 
 	void Update(const double& dt);
 	void Draw(EGEMath::Viewport& viewport);	
 private:
 	Map map;
+	EGEMath::Input* input;
 };
 
 #endif

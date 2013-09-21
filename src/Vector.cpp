@@ -61,71 +61,71 @@ void Vector::rotate(float Degrees)
 }
 #pragma region operators
 
-Vector Vector::operator-()
+Vector operator -(const Vector& RightVal)
 {
-	return Vector(-this->x, -this->y);
+	return Vector(-RightVal.x, -RightVal.y);
 }
 
-Vector Vector::operator +(const Vector& RightVal)
+Vector operator +(const Vector& LeftVal,const Vector& RightVal)
 {
-	return Vector(this->x+RightVal.x,this->y+RightVal.y);
+	return Vector(LeftVal.x+RightVal.x,LeftVal.y+RightVal.y);
 }
-Vector Vector::operator -(const Vector& RightVal)
+Vector operator -(const Vector& LeftVal,const Vector& RightVal)
 {
-	return Vector(this->x-RightVal.x,this->y-RightVal.y);
-}
-
-Vector &Vector::operator +=(const Vector& RightVal)
-{
-	this->x += RightVal.x;
-	this->y += RightVal.y;
-	return *this;
-}
-Vector &Vector::operator -=(const Vector& RightVal)
-{
-	this->x -= RightVal.x;
-	this->y -= RightVal.y;
-	return *this;
+	return Vector(LeftVal.x-RightVal.x,LeftVal.y-RightVal.y);
 }
 
-Vector Vector::operator /(float RightVal)
+Vector operator +=(Vector& LeftVal,const Vector& RightVal)
 {
-	return Vector(this->x / (float)RightVal,this->y / (float)RightVal);
+	LeftVal.x += RightVal.x;
+	LeftVal.y += RightVal.y;
+	return Vector(LeftVal.x,LeftVal.y);
 }
-Vector &Vector::operator /=(float RightVal)
+Vector operator -=(Vector& LeftVal,const Vector& RightVal)
 {
-	this->x /= (float)RightVal;
-	this->y /= (float)RightVal;
-	return *this;
+	LeftVal.x -= RightVal.x;
+	LeftVal.y -= RightVal.y;
+	return Vector(LeftVal.x,LeftVal.y);
 }
 
-bool Vector::operator ==(const Vector& RightVal)
+Vector operator /(const Vector& LeftVal, const float& RightVal)
 {
-	if (this->x == RightVal.x && this->y == RightVal.y)
+	return Vector(LeftVal.x / (float)RightVal,LeftVal.y / (float)RightVal);
+}
+Vector operator /=(Vector& LeftVal, const float& RightVal)
+{
+	LeftVal.x /= (float)RightVal;
+	LeftVal.y /= (float)RightVal;
+	return Vector(LeftVal.x,LeftVal.y);;
+}
+
+bool operator ==(const Vector& LeftVal,const Vector& RightVal)
+{
+	if (LeftVal.x == RightVal.x && LeftVal.y == RightVal.y)
 		return true;
 	return false;
 }
-bool Vector::operator !=(const Vector& RightVal)
+bool operator !=(const Vector& LeftVal,const Vector& RightVal)
 {
-	if (this->x == RightVal.x && this->y == RightVal.y)
+	if (LeftVal.x == RightVal.x && LeftVal.y == RightVal.y)
 		return false;
 	return true;
 }
 
-Vector operator *(const Vector& LeftVal, const float RightVal)
+Vector operator *(const Vector& LeftVal, const float& RightVal)
 {
 	return Vector(LeftVal.x * RightVal,LeftVal.y * RightVal);
 }
-Vector operator *(const float LeftVal, const Vector& RightVal)
+Vector operator *(const float& LeftVal, const Vector& RightVal)
 {
 	return Vector(LeftVal * RightVal.x,LeftVal * RightVal.y);
 }
 
-const Vector &operator *=(Vector& LeftVal, float RightVal)
+const Vector operator *=(Vector& LeftVal,const float& RightVal)
 {
 	LeftVal.x *= RightVal;
 	LeftVal.y *= RightVal;
-	return LeftVal;
+	return Vector(LeftVal.x,LeftVal.y);;
 }
 
 std::ostream& operator <<(std::ostream& Ostr, const Vector& RightVal)

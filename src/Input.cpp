@@ -64,7 +64,7 @@ bool Input::isButtonDown(Button button, bool onPressOnly)
 
 Vector Input::getMousePositionOnMap()
 {
-	return (getMousePosition()+m_viewport->getCameraPosition());
+	return (getMousePosition()+m_viewport->getCameraPosition())-m_viewport->getWindowSize()/2.0f;
 }
 Vector Input::getMousePosition()
 {

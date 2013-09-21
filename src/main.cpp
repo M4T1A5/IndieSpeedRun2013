@@ -1,13 +1,19 @@
 #include <SFML\Graphics.hpp>
+
 #include <Game.h>
 #include <Viewport.h>
+#include <Input.h>
+#include <Camera.h>
+
+#include <iostream>
 
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1280,720), "I dont even");
 	EGEMath::Viewport viewport(&window);
-
-	Game game;
+	EGEMath::Input input(&viewport);
+	EGEMath::Camera camera(input,viewport);
+	Game game(input);
 
 	// Deltatime
 	sf::Clock clock;
@@ -21,8 +27,14 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-
 		game.Update(dt);
+		
+		std::cout<<"\n"<<input.getMousePosition()<<input.getMousePositionOnMap();
+
+		if (input.isButtonDown(EGEMath::MouseLeft))
+		{
+			camera.FollowMouse();
+		}
 
         window.clear();
 		game.Draw(viewport);
