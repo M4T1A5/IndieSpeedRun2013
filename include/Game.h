@@ -1,6 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <vector>
+#include <Button.h>
 #include <Viewport.h>
 #include <Map.h>
 #include <Input.h>
@@ -27,6 +29,11 @@ private:
 	EGEMotor::Camera* camera;
 	EGEMotor::Viewport* viewport;
 	GameState gameState;
+
+	EGEMotor::Texture *sidebarTexture, *buttonTexture;
+	GameObject sidebar;
+
+	std::vector<GUIButton*> buttons;
 };
 
 #endif

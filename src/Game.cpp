@@ -9,6 +9,24 @@ Game::Game(Viewport& viewport, Input &input)
 	  gameState(MENU)
 {
 	camera = new Camera(input, viewport, map.GetSize());
+
+	// Sidebar
+	sidebarTexture = new Texture("sidebar.png");
+	sidebar.setTexture(sidebarTexture);
+	Vector sidebarPos = Vector(viewport.getWindowSize().x - sidebarTexture->getTextureSize().x, 0);
+	sidebar.setPosition(sidebarPos);
+	sidebar.setLayer(295);
+
+	// Buttons
+	buttonTexture = new Texture("buttons.png");
+	for(int i = 0; i < 4; ++i)
+	{
+		Vector buttonPos = sidebarPos + Vector(0, i*100);
+		Rectangle crop = Rectangle(Vector(i*150, 0), Vector(150,150));
+		auto button = new GUIButton(buttonTexture, buttonPos, crop, &input);
+		button->setLayer(296);
+		buttons.push_back(button);
+	}
 }
 
 
@@ -31,11 +49,11 @@ void Game::Update(const double& dt)
 			gameState = WARMUP;
 		break;
 	case WARMUP:
-		if((windowSize.x - mousePos.x) < 100 || mousePos.x < 100)
+		if((windowSize.x - mousePos.x) < 5 || mousePos.x < 5)
 		{
 			camera->FollowMouse(dt);
 		}
-		else if((windowSize.y - mousePos.y) < 100 || mousePos.y < 100)
+		else if((windowSize.y - mousePos.y) < 5 || mousePos.y < 5)
 		{
 			camera->FollowMouse(dt);
 		}
@@ -55,6 +73,13 @@ void Game::Update(const double& dt)
 		break;
 	}
 
+	for(size_t i = 0; i < buttons.size(); ++i)
+	{
+		if(buttons[i]->mouseOver())
+			buttons[i]->setColor(255,255,255,255);
+		else
+			buttons[i]->setColor(255,255,255,150);
+	}
 	map.Update(dt);
 }
 
@@ -68,6 +93,12 @@ void Game::Draw(EGEMotor::Viewport& viewport)
 	case WARMUP:
 	case PLAY:
 		map.Draw(viewport);
+		
+		for(size_t i = 0; i < buttons.size(); ++i)
+		{
+			buttons[i]->draw(viewport);
+		}
+		sidebar.Draw(viewport);
 		viewport.renderSprites();
 		break;
 	}
