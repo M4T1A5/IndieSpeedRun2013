@@ -32,7 +32,7 @@ public:
 	void SetLayer(unsigned int layer);
 	unsigned int GetLayer();
 
-private:
+protected:
 	virtual void move(const double& dt);
 
 	float _speed;

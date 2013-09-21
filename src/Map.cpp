@@ -5,11 +5,12 @@ using namespace EGEMotor;
 
 Map::Map()
 {
-	mapImage.loadFromFile("assets/map.png"); // For pixel checking
-	size = mapImage.getSize();
+	riverImage.loadFromFile("assets/joet.png"); // For pixel checking
+	size = riverImage.getSize();
 	textures["map"] = new Texture("map.png");
 	textures["forest"] = new Texture("forest.png");
 	textures["swamp"] = new Texture("swamp.png");
+	textures["character"] = new Texture("arke_spritesheet.png");
 	AddElement(MapElements::Background);
 }
 
@@ -51,6 +52,9 @@ void Map::AddElement(MapElements mapElement, Vector pos)
 	case MapElements::Swamp:
 		elementName = "swamp";
 		break;
+	case MapElements::Character:
+		elementName = "character";
+		break;
 	}
 
 	auto gameObject = new GameObject(textures[elementName]);
@@ -67,5 +71,5 @@ void Map::AddElement(MapElements mapElement, Vector pos)
 
 sf::Color Map::GetPixel(Vector pos)
 {
-	return mapImage.getPixel(pos.x, pos.y);
+	return riverImage.getPixel(pos.x, pos.y);
 }

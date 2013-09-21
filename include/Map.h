@@ -6,6 +6,7 @@
 #include <Sprite.h>
 #include <Viewport.h>
 #include <GameObject.h>
+#include <AnimatedGameObject.h>
 #include <string>
 
 class Map
@@ -15,7 +16,8 @@ public:
 	{
 		Background, // Actual Map
 		Forest,
-		Swamp
+		Swamp,
+		Character
 	};
 
 	Map();
@@ -26,7 +28,7 @@ public:
 	void AddElement(MapElements mapElement, EGEMath::Vector pos = EGEMath::Vector());
 	sf::Color GetPixel(EGEMath::Vector pos);
 private:
-	sf::Image mapImage;
+	sf::Image riverImage;
 	std::vector<GameObject*> gameObjects;
 	std::map<std::string, EGEMotor::Texture*> textures;
 
