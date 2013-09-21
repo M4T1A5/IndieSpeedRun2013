@@ -162,6 +162,10 @@ void Sprite::setLayer(int Layer)
 	else if (Layer > LAYER_COUNT)
 		m_layer = LAYER_COUNT;
 }
+int Sprite::getLayer()
+{
+	return m_layer;
+}
 //Vector Sprite::getColor()
 //{
 //	return m_sprite->getColor(); fix this if u can

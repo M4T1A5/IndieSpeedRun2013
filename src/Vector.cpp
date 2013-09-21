@@ -50,6 +50,15 @@ float Vector::getAngle()
 		return angle;
 	}
 }
+Vector Vector::Normalize(Vector& vector)
+{
+	float lenght = vector.getLenght();
+	if (vector.x != 0)
+		vector.x /= lenght;
+	if (vector.y != 0)
+		vector.y /= lenght;
+	return Vector(vector);
+}
 void Vector::rotate(float Degrees)
 {
 	Degrees = fmod(Degrees,360);

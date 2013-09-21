@@ -19,30 +19,10 @@ public:
 
 	float Vector::getLenght();
 	float Vector::getAngle();
+	Vector Normalize(Vector& vectorToNormalize);
 	void Vector::rotate(float Degrees);
 
 	float x,y;
-
-	//Vector operator -();
-
-	//Vector operator +(const Vector& RightVal);
-	//Vector operator -(const Vector& RightVal);
-
-	//Vector &operator +=(const Vector RightVal);
-	//Vector &operator -=(const Vector RightVal);
-
-	//Vector operator /(float &RightVal);
-	//Vector &operator /=(float RightVal);
-
-	//bool operator ==(const Vector& RightVal);
-	//bool operator !=(const Vector& RightVal);
-
-	//friend Vector operator *(const Vector& LeftVal, const float& RightVal);
-	//friend Vector operator *(const float LeftVal, const Vector& RightVal);
-
-	//friend const Vector &operator *=(Vector& LeftVal, const float RightVal);
-
-	//friend std::ostream& operator <<(std::ostream& Ostr, const Vector& RightVal);
 };
 
 Vector operator -(const Vector& RightVal);
