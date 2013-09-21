@@ -12,6 +12,7 @@ public:
 	enum GameState
 	{
 		MENU,
+		WARMUP,
 		PLAY,
 		PAUSE
 	};
@@ -25,6 +26,7 @@ private:
 	EGEMotor::Input* input;
 	EGEMotor::Camera* camera;
 	EGEMotor::Viewport* viewport;
+	GameState gameState;
 };
 
 #endif

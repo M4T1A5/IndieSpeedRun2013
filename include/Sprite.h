@@ -16,6 +16,7 @@ public:
 	~Texture();
 
 	void loadTexture(std::string TextureName);
+	const EGEMath::Vector getTextureSize();
 
 private:
 	Texture(Texture& texture);

@@ -13,6 +13,10 @@ Texture::Texture(std::string TextureName)
 {
 	loadTexture(TextureName);
 }
+const Vector Texture::getTextureSize()
+{
+	return m_texture->getSize();
+}
 Texture::~Texture()
 {
 	delete m_texture;

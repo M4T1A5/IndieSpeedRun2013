@@ -5,13 +5,16 @@ using namespace EGEMotor;
 
 Map::Map()
 {
+	_mapElements.resize(MapElementCount);
 	riverImage.loadFromFile("assets/joet.png"); // For pixel checking
 	size = riverImage.getSize();
 	textures["map"] = new Texture("map.png");
+	textures["river"] = new Texture("joet.png");
 	textures["forest"] = new Texture("forest.png");
 	textures["swamp"] = new Texture("swamp.png");
 	textures["character"] = new Texture("arke_sheet.png");
 	textures["volcano"] = new Texture("volcano.png");
+	CreateMapElements();
 	AddElement(MapElements::Background);
 	AddElement(MapElements::Volcano,Vector(1250,450));
 }
@@ -20,83 +23,78 @@ Map::Map()
 Map::~Map()
 {
 	textures.empty();
-	gameObjects.empty();
+	_mapElements.empty();
+	_mapElementList.empty();
 }
 
 void Map::Update(const double& dt)
 {
-	for(size_t i = 0; i < gameObjects.size(); ++i)
+	for(size_t i = 0; i < _mapElements.size(); ++i)
 	{
-		gameObjects[i]->Update(dt);
+		for(size_t j = 0; j < _mapElements[i].size(); ++j)
+		{
+			_mapElements[i][j]->Update(dt);
+		}
 	}
 }
 
 void Map::Draw(Viewport& viewport)
 {
-	for(size_t i = 0; i < gameObjects.size(); ++i)
+	for(size_t i = 0; i < _mapElements.size(); ++i)
 	{
-		gameObjects[i]->Draw(viewport);
+		for(size_t j = 0; j < _mapElements[i].size(); ++j)
+		{
+			_mapElements[i][j]->Draw(viewport);
+		}
 	}
 }
 
 void Map::AddElement(MapElements mapElement, Vector pos)
 {
+	Element* element;
 	switch(mapElement)
 	{
 	// Special case
 	case MapElements::Background:
-		{
-		auto gameObject = new GameObject(textures["map"]);
-		gameObjects.push_back(gameObject);
-		}
+		element = new Element(Vector(),_mapElementList[Background]);
+		break;
+	case MapElements::River:
+		element = new Element(Vector(),_mapElementList[River]);
 		break;
 	case MapElements::Forest:
-		{
-		auto gameObject = new GameObject(textures["forest"]);
-		gameObject->SetSpeed(300);
-		gameObject->setPosition(Vector(pos.x, pos.y - 200));
-		gameObject->SetTarget(pos);
-		gameObject->setOriginPoint(5);
-		gameObject->setScale(0.7f);
-		gameObjects.push_back(gameObject);
-		}
+		element = new Element(pos,_mapElementList[Forest]);
 		break;
 	case MapElements::Swamp:
-		{
-		auto gameObject = new GameObject(textures["swamp"]);
-		gameObject->SetSpeed(300);
-		gameObject->setPosition(Vector(pos.x, pos.y - 200));
-		gameObject->SetTarget(pos);
-		gameObject->setOriginPoint(5);
-		gameObject->setScale(1.0f);
-		gameObjects.push_back(gameObject);
-		}
-		break;
-	case MapElements::Character:
-		{
-		auto gameObject = 
-			new AnimatedGameObject(textures["character"], 16, 250, 450);
-		gameObject->SetSpeed(300);
-		gameObject->setPosition(Vector(pos.x, pos.y - 200));
-		gameObject->SetTarget(pos);
-		gameObject->setOriginPoint(5);
-		gameObject->setScale(0.1f);
-		gameObjects.push_back(gameObject);
-		}
+		element = new Element(pos,_mapElementList[Swamp]);
 		break;
 	case MapElements::Volcano:
-		{
-		auto gameObject = new GameObject(textures["volcano"]);
-		gameObject->setPosition(Vector(pos.x, pos.y - 200));
-		gameObject->setOriginPoint(5);
-		gameObject->setScale(0.6f);
-		gameObjects.push_back(gameObject);
-		}
+		element = new Element(pos,_mapElementList[Volcano]);
+		break;
+	case MapElements::Character:
+		element = new Element(pos,_mapElementList[Character]);
 		break;
 	}
+	_mapElements[mapElement].push_back(element);
 }
 
 sf::Color Map::GetPixel(Vector pos)
 {
 	return riverImage.getPixel(pos.x, pos.y);
+}
+
+void Map::CreateMapElements()
+{
+	_mapElementList.push_back(new MapElement(MapElements::Background,textures["map"],		
+		0, 0, 1.0f));
+	_mapElementList.push_back(new MapElement(MapElements::River,textures["river"],		
+		0, 0, 1.0f));
+	_mapElementList.push_back(new MapElement(MapElements::Forest, textures["forest"],		
+		30, 300, 0.6f));
+	_mapElementList.push_back(new MapElement(MapElements::Swamp, textures["swamp"],	
+		30, 300, 1.0f));
+	_mapElementList.push_back(new MapElement(MapElements::Volcano, textures["volcano"],	
+		0, 0, 1.0f));
+
+	_mapElementList.push_back(new MapElement(	MapElements::Character, textures["character"],
+		5, 150, 0.1f, 4, 4));
 }

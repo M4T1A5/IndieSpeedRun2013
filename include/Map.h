@@ -8,18 +8,11 @@
 #include <GameObject.h>
 #include <AnimatedGameObject.h>
 #include <string>
+#include <MapElements.h>
 
 class Map
 {
 public:
-	enum MapElements
-	{
-		Background, // Actual Map
-		Forest,
-		Swamp,
-		Character,
-		Volcano
-	};
 
 	Map();
 	~Map();
@@ -34,10 +27,13 @@ public:
 	EGEMath::Vector GetSize() { return size; }
 private:
 	sf::Image riverImage;
-	std::vector<GameObject*> gameObjects;
+	std::vector<std::vector<Element*>> _mapElements;
 	std::map<std::string, EGEMotor::Texture*> textures;
 
+	void CreateMapElements();
+
 	EGEMath::Vector size;
+	std::vector<MapElement*> _mapElementList;
 };
 
 #endif
