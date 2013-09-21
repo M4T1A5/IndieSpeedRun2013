@@ -3,12 +3,11 @@
 using namespace EGEMath;
 using namespace EGEMotor;
 
-Game::Game(Camera& camera, Viewport& viewport, Input &input)
+Game::Game(Viewport& viewport, Input &input)
 	: input(&input),
-	  camera(&camera),
 	  viewport(&viewport)
 {
-
+	camera = new Camera(input, viewport, map.GetSize());
 }
 
 

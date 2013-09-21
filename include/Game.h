@@ -15,7 +15,7 @@ public:
 		PLAY,
 		PAUSE
 	};
-	Game(EGEMotor::Camera& camera, EGEMotor::Viewport& viewport, EGEMotor::Input &input);
+	Game(EGEMotor::Viewport& viewport, EGEMotor::Input &input);
 	~Game();
 
 	void Update(const double& dt);

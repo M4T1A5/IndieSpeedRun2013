@@ -24,8 +24,7 @@ int main()
 
 	EGEMotor::Viewport viewport(&window);
 	EGEMotor::Input input(&viewport);
-	EGEMotor::Camera camera(input,viewport);
-	Game game(camera, viewport, input);
+	Game game(viewport, input);
 
 	// Deltatime
 	sf::Clock clock;
