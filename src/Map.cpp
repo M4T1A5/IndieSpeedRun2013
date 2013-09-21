@@ -57,9 +57,10 @@ void Map::AddElement(MapElements mapElement, Vector pos)
 	if(elementName != "map")
 	{
 		// Add a new gameobject with correct texture		
-		gameObject->SetSpeed(2);
+		gameObject->SetSpeed(300);
 		gameObject->SetPosition(Vector(pos.x, pos.y - 200));
 		gameObject->SetTarget(pos);
+		gameObject->SetOriginPoint(5);
 	}
 	gameObjects.push_back(gameObject);
 }

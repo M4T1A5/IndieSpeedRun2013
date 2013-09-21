@@ -15,6 +15,10 @@ public:
 	virtual void Draw(EGEMotor::Viewport& viewport);
 	virtual void Update(const double& dt);
 
+	void SetOrigin(EGEMath::Vector origin);
+	void SetOriginPoint(int point);
+	EGEMath::Vector GetOrigin();
+
 	void SetTarget(EGEMath::Vector target);
 	void ResetTarget();
 
