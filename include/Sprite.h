@@ -45,6 +45,7 @@ public:
 	void setScale(EGEMath::Vector Scale);
 	/*Layer 0-5 game items, 10-290 pickups, 295-300 menu items*/
 	void setLayer(int Layer);
+	int getLayer();
 	//Vector getColor(); lets make this later...
 	EGEMath::Vector getPosition();
 	EGEMath::Vector getOrigin();

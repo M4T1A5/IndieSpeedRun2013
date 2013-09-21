@@ -2,32 +2,32 @@
 #define PARTICLEENGINE_H
 
 #include <iostream>
-#include "program.h"
-#include "particle.h"
+#include <Particle.h>
+#include <Viewport.h>
 
 namespace EGEMotor
 {
 
-class particleEngine
+class ParticleEngine
 {
 public:
-	particleEngine(al::font* Font);
-	~particleEngine();
-	void update(float DeltaTime);
-	void draw(al::viewport* Viewport);
-	void reset();
+	ParticleEngine(EGEMotor::Font* Font);
+	~ParticleEngine();
+	void Update(float DeltaTime);
+	void Draw(EGEMotor::Viewport* viewport);
+	void Reset();
 
-	void addSplash(al::vector Position, al::vector Direction);
-	void addFeather(al::vector Position, bool Enemy = false);
-	void addFeather(al::vector Position, al::vector Direction, float SpreadDegrees, bool Enemy = false);
-	void addScore(al::vector Position, float Score);
+	void addSplash(EGEMath::Vector Position, EGEMath::Vector Direction);
+	void addFeather(EGEMath::Vector Position, bool Enemy = false);
+	void addFeather(EGEMath::Vector Position, EGEMath::Vector Direction, float SpreadDegrees, bool Enemy = false);
+	void addScore(EGEMath::Vector Position, float Score);
 private:
-	al::texture* m_splashTexture;
-	al::texture* m_featherTexture;
-	al::texture* m_plusPoint;
-	al::texture* m_minusPoint;
-	al::font* m_font;
-	std::vector<particle*> m_particles;
+	EGEMotor::Texture* m_splashTexture;
+	EGEMotor::Texture* m_featherTexture;
+	EGEMotor::Texture* m_plusPoint;
+	EGEMotor::Texture* m_minusPoint;
+	EGEMotor::Font* m_font;
+	std::vector<Particle*> m_particles;
 };
 
 }
