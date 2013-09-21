@@ -23,7 +23,7 @@ void Texture::loadTexture(std::string TextureName)
 	{
 		m_texture = new sf::Texture();
 		m_texture->loadFromFile("Assets/" + TextureName);
-		m_texture->setSmooth(true);
+		m_texture->setSmooth(false);
 	}
 	else 
 	{

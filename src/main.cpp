@@ -33,6 +33,11 @@ int main()
 
 	while (window.isOpen())
     {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) ||
+				(sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) &&
+				sf::Keyboard::isKeyPressed(sf::Keyboard::F4)))
+			exit(0);
+
 		input.keepMouseInWindow();
         sf::Event event;
         while (window.pollEvent(event))

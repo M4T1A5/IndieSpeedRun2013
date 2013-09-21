@@ -52,9 +52,10 @@ void Map::AddElement(MapElements mapElement, Vector pos)
 		{
 		auto gameObject = new GameObject(textures["forest"]);
 		gameObject->SetSpeed(300);
-		gameObject->SetPosition(Vector(pos.x, pos.y - 200));
+		gameObject->setPosition(Vector(pos.x, pos.y - 200));
 		gameObject->SetTarget(pos);
-		gameObject->SetOriginPoint(5);
+		gameObject->setOriginPoint(5);
+		gameObject->setScale(1.0f);
 		gameObjects.push_back(gameObject);
 		}
 		break;
@@ -62,9 +63,10 @@ void Map::AddElement(MapElements mapElement, Vector pos)
 		{
 		auto gameObject = new GameObject(textures["swamp"]);
 		gameObject->SetSpeed(300);
-		gameObject->SetPosition(Vector(pos.x, pos.y - 200));
+		gameObject->setPosition(Vector(pos.x, pos.y - 200));
 		gameObject->SetTarget(pos);
-		gameObject->SetOriginPoint(5);
+		gameObject->setOriginPoint(5);
+		gameObject->setScale(1.0f);
 		gameObjects.push_back(gameObject);
 		}
 		break;
@@ -73,9 +75,10 @@ void Map::AddElement(MapElements mapElement, Vector pos)
 		auto gameObject = 
 			new AnimatedGameObject(textures["character"], 16, 250, 450);
 		gameObject->SetSpeed(300);
-		gameObject->SetPosition(Vector(pos.x, pos.y - 200));
+		gameObject->setPosition(Vector(pos.x, pos.y - 200));
 		gameObject->SetTarget(pos);
-		gameObject->SetOriginPoint(5);
+		gameObject->setOriginPoint(5);
+		gameObject->setScale(0.1f);
 		gameObjects.push_back(gameObject);
 		}
 		break;
