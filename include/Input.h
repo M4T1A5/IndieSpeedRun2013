@@ -34,6 +34,7 @@ public:
 	//void setAbsoluteMousePosition(const vector& position);
 
 	void setMousePosition(const EGEMath::Vector& position);
+	void keepMouseInWindow();
 
 	bool active;
 private:

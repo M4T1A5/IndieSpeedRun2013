@@ -17,10 +17,10 @@ public:
 	Vector(sf::Vector2u sfVector);
 	~Vector(void);
 
-	float Vector::getLenght();
-	float Vector::getAngle();
-	Vector Normalize(Vector& vectorToNormalize);
-	void Vector::rotate(float Degrees);
+	float getLenght();
+	float getAngle();
+	Vector Normalize();
+	void rotate(float Degrees);
 
 	float x,y;
 };

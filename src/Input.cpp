@@ -100,6 +100,8 @@ Vector Input::getMousePosition()
 	return Vector(0,0);
 }
 
+
+
 //void Input::setAbsoluteMousePosition(const vector& position)
 //{
 //	sf::Vector2i pos(position.x, position.y);
@@ -110,4 +112,20 @@ void Input::setMousePosition(const Vector& position)
 {
 	sf::Vector2i pos(position.x, position.y);
 	sf::Mouse::setPosition(pos,*m_viewport->m_window);
+}
+
+void Input::keepMouseInWindow()
+{
+	Vector mousepos = getMousePosition();
+	Vector view = m_viewport->getWindowSize();
+
+	if (mousepos.x<0)
+		setMousePosition(Vector(0,mousepos.y));
+	else if (mousepos.x>view.x)
+		setMousePosition(Vector(view.y,mousepos.y));
+
+	if (mousepos.y<0)
+		setMousePosition(Vector(mousepos.x,0));
+	else if (mousepos.y>view.y)
+		setMousePosition(Vector(mousepos.x,view.y));
 }
