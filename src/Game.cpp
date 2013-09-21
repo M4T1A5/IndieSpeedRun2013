@@ -9,6 +9,7 @@ Game::Game(Viewport& viewport, Input &input)
 	  gameState(MENU)
 {
 	camera = new Camera(input, viewport, map.GetSize());
+	particleEngine = new ParticleEngine();
 }
 
 
@@ -43,6 +44,8 @@ void Game::Update(const double& dt)
 		if(input->isButtonPressed(Button::MouseLeft))
 		{
 			map.AddElement(Forest, input->getMousePositionOnMap());
+			//particleEngine->addTest(Vector(input->getMousePositionOnMap()),Vector(1.0f,0));
+
 		}
 		else if(input->isButtonPressed(Button::MouseRight))
 		{
@@ -55,7 +58,9 @@ void Game::Update(const double& dt)
 		break;
 	}
 
+	
 	map.Update(dt);
+	particleEngine->Update(dt);
 }
 
 void Game::Draw(EGEMotor::Viewport& viewport)
@@ -68,9 +73,10 @@ void Game::Draw(EGEMotor::Viewport& viewport)
 	case WARMUP:
 	case PLAY:
 		map.Draw(viewport);
-		viewport.renderSprites();
 		break;
 	}
-
+	particleEngine->Draw(&viewport);
+		
+	viewport.renderSprites();
 
 }

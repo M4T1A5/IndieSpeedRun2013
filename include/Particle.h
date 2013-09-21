@@ -4,6 +4,7 @@
 #include <Viewport.h>
 #include <Animation.h>
 #include <iostream>
+#define PI 3.14159265358979323846264
 
 class Particle
 {
@@ -24,22 +25,19 @@ protected:
 };
 
 
-////Splash Particle
+//Splash Particle
 
-//class splashParticle : public particle
-//{
-//public:
-//	splashParticle(al::vector Position, al::vector Direction, al::vector Scale, al::texture* Texture);
-//	~splashParticle(){}
-//	bool update(float DeltaTime);
-//
-//private:
-//	animation* m_animation;
-//	float m_startY;
-//};
+class testParticle : public Particle
+{
+public:
+	testParticle(EGEMath::Vector Position, EGEMath::Vector Direction, EGEMath::Vector Scale, EGEMotor::Texture* texture);
+	~testParticle(){}
+	bool Update(float DeltaTime);
 
-
-
+private:
+	Animation* m_animation;
+	float m_startY;
+};
 
 
 

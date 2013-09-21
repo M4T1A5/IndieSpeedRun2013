@@ -5,6 +5,7 @@
 #include <Map.h>
 #include <Input.h>
 #include <Camera.h>
+#include <ParticleEngine.h>
 
 class Game
 {
@@ -23,6 +24,7 @@ public:
 	void Draw(EGEMotor::Viewport& viewport);	
 private:
 	Map map;
+	EGEMotor::ParticleEngine* particleEngine;
 	EGEMotor::Input* input;
 	EGEMotor::Camera* camera;
 	EGEMotor::Viewport* viewport;

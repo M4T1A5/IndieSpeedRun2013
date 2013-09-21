@@ -33,33 +33,33 @@ void Particle::Draw(Viewport* viewport)
 	viewport->draw(&m_sprite);
 }
 
-////Splash Particle
+//Splash Particle
 
-//splashParticle::splashParticle(vector Position, vector Direction, vector Scale, texture* Texture)
-//	: particle(Position,vector(Direction.x/5.0f,-Direction.y/5.0f),Scale,Texture,1.0f)
-//{
-//	m_startY = Position.y;
-//	//m_direction = vector(Direction.x/5.0f,-Direction.y/5.0f);
-//	m_animation = new animation(&m_sprite,7,176,114, 6 / m_life,0,false);
-//	m_sprite.setOrigin(m_sprite.getSize()/2);
-//	m_sprite.setColor(255,255,255,180);
-//	if (Direction.x > 0)
-//	{
-//		m_scale.x = -m_scale.x;
-//		m_sprite.setScale(m_scale);
-//	}
-//}
-//bool splashParticle::update(float DeltaTime)
-//{
-//	m_animation->update(DeltaTime);
-//	particle::update(DeltaTime);
-//	//m_life-= DeltaTime;
-//	m_sprite.setPosition(vector(m_position.x, float(m_startY + 50 * sin(PI*(-m_life/m_startLife)))));
-//	m_sprite.setLayer(int(((m_position.y - WATER_TOP) / (WATER_BOTTOM - WATER_TOP)) * 275 + 80));
-//	if (m_animation->getCurrentFrame() > 5)
-//		return true;
-//	return false;
-//}
+testParticle::testParticle(Vector position, Vector direction, Vector scale, Texture* texture)
+	: Particle(position,Vector(direction.x/5.0f,-direction.y/5.0f),scale,texture,1.0f)
+{
+	m_startY = position.y;
+	//m_direction = vector(Direction.x/5.0f,-Direction.y/5.0f);
+	m_animation = new Animation(&m_sprite,3,400,600, 20,0,true);
+	m_sprite.setOrigin(m_sprite.getSize()/2);
+	m_sprite.setColor(255,255,255,180);
+	if (direction.x > 0)
+	{
+		m_scale.x = -m_scale.x;
+		m_sprite.setScale(m_scale);
+	}
+	m_sprite.setLayer(285);
+}
+bool testParticle::Update(float DeltaTime)
+{
+	m_animation->Update(DeltaTime);
+	Particle::Update(DeltaTime);
+	m_life-= DeltaTime;
+	m_sprite.setPosition(Vector(m_position.x, float(m_startY + 50 * sin(PI*(-m_life/m_startLife)))));
+	if (m_animation->getCurrentFrame() > 3)
+		return true;
+	return false;
+}
 
 
 
