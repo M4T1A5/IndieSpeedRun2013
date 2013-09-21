@@ -24,8 +24,23 @@ int main()
         sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
+			switch (event.type)
+			{
+			case sf::Event::Closed:
                 window.close();
+				break;
+			case sf::Event::LostFocus:
+				input.active = false;
+				break;
+			case sf::Event::GainedFocus:
+				input.active = true;
+				break;
+			case sf::Event::MouseLeft:
+				if (input.active)
+					input.keepMouseInWindow();
+				break;
+			}
+
         }
 		game.Update(dt);
 		
