@@ -52,12 +52,15 @@ void Map::AddElement(MapElements mapElement, Vector pos)
 		elementName = "swamp";
 		break;
 	}
-	// Add a new gameobject with correct texture
-	auto gameObject = new GameObject(textures[elementName]);
-	gameObject->SetSpeed(2);
-	gameObject->SetPosition(Vector(pos.x, pos.y - 200));
-	gameObject->SetTarget(pos);
 
+	auto gameObject = new GameObject(textures[elementName]);
+	if(elementName != "map")
+	{
+		// Add a new gameobject with correct texture		
+		gameObject->SetSpeed(2);
+		gameObject->SetPosition(Vector(pos.x, pos.y - 200));
+		gameObject->SetTarget(pos);
+	}
 	gameObjects.push_back(gameObject);
 }
 
