@@ -122,7 +122,7 @@ void Input::keepMouseInWindow()
 	if (mousepos.x<0)
 		setMousePosition(Vector(0,mousepos.y));
 	else if (mousepos.x>view.x)
-		setMousePosition(Vector(view.y,mousepos.y));
+		setMousePosition(Vector(view.x,mousepos.y));
 
 	if (mousepos.y<0)
 		setMousePosition(Vector(mousepos.x,0));
