@@ -21,6 +21,7 @@ int main()
 
 	while (window.isOpen())
     {
+		input.keepMouseInWindow();
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -42,14 +43,15 @@ int main()
 			}
 
         }
-		game.Update(dt);
-		
-		std::cout<<"\n"<<input.getMousePosition()<<input.getMousePositionOnMap();
+		if (input.active)
+		{
+			game.Update(dt);
 
-
-		window.clear();
-		game.Draw(viewport);
-        window.display();
+			window.clear();
+			game.Draw(viewport);
+			input.keepMouseInWindow();
+			window.display();
+		}
 		dt = clock.restart().asMicroseconds() / 1000000.0;
     }
 	

@@ -32,42 +32,42 @@ bool Input::isButtonDown(Button button, bool onPressOnly)
 			{
 				if (!onPressOnly) // down-function
 					return true; 
-				else if (isReleased[sf::Mouse::Left]) // pressed-function
+				else if (isReleased[0]) // pressed-function
 				{
-					isReleased[sf::Mouse::Left] = false; // button is not released anymore
+					isReleased[0] = false; // button is not released anymore
 					return true; // but it was released
 				}
 			}
 			else
-				isReleased[sf::Mouse::Left] = true; // button is released
+				isReleased[0] = true; // button is released
 			break;
 		case MouseRight:
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
 			{
 				if (!onPressOnly) // down-function
 					return true; 
-				else if (isReleased[sf::Mouse::Right]) // pressed-function
+				else if (isReleased[1]) // pressed-function
 				{
-					isReleased[sf::Mouse::Right] = false; // button is not released anymore
+					isReleased[1] = false; // button is not released anymore
 					return true; // but it was released
 				}
 			}
 			else
-				isReleased[sf::Mouse::Left] = true; // button is released
+				isReleased[1] = true; // button is released
 			break;
 		case MouseMiddle:
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Middle))
 			{
 				if (!onPressOnly) // down-function
 					return true; 
-				else if (isReleased[sf::Mouse::Middle]) // pressed-function
+				else if (isReleased[2]) // pressed-function
 				{
-					isReleased[sf::Mouse::Middle] = false; // button is not released anymore
+					isReleased[2] = false; // button is not released anymore
 					return true; // but it was released
 				}
 			}
 			else
-				isReleased[sf::Mouse::Left] = true; // button is released
+				isReleased[2] = true; // button is released
 			break;
 		default:
 #if _DEBUG
