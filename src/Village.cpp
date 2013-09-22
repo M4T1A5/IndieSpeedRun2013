@@ -6,7 +6,7 @@ using namespace EGEMotor;
 Village::Village(Texture* texture, Vector position)
 	: GameObject(texture),
 	  Clock(0),
-	  NextVillager(5)
+	  NextVillager(0)
 {
 	setPosition(position);
 }

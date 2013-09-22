@@ -21,7 +21,7 @@ Game::Game(Viewport& viewport, Input &input)
 	srand(time(NULL));
 	camera = new Camera(input, viewport, map.GetSize());
 	_townTexture.loadTexture("village.png");
-	//_villageTexture.loadTexture("");
+	_villageTexture.loadTexture("settlement.png");
 	_explorerTexture.loadTexture("arke_sheet.png");
 	_villages.push_back(new Village(&_townTexture,Vector(300,800)));
 
@@ -189,8 +189,8 @@ void Game::Update(const double& dt)
 
 						if ((_explorers[i]->getPosition()-map._mapElements[j][k]->getPosition())
 							.getLenght()< map._mapElementList[j]->Radius)
-							_explorers[i]->slowed=true;
 						{
+							_explorers[i]->slowed=true;
 							if (activeButton[FOREST])
 							{
 								if(rand()%10000 > 9999-10000*dt);
@@ -200,10 +200,11 @@ void Game::Update(const double& dt)
 					case Swamp:
 						if ((_explorers[i]->getPosition()-map._mapElements[j][k]->getPosition())
 							.getLenght()< map._mapElementList[j]->Radius)
-							_explorers[i]->slowed=true;
-						if (activeButton[SWAMP])
 						{
-
+							_explorers[i]->slowed=true;
+							if (activeButton[SWAMP])
+							{
+							}
 						}
 						break;
 					case Volcano:
@@ -212,7 +213,7 @@ void Game::Update(const double& dt)
 				}
 			}
 
-
+			//for ()particleEngine->m_particles.size
 		}
 
 
