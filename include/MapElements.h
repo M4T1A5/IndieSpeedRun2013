@@ -27,7 +27,7 @@ class MapElement
 {
 public:
 	MapElement(MapElements Name, EGEMotor::Texture *texture, float AOERadius, 
-		float speed, float scale, int Xframes = 1, int Yframes = 1);
+		float speed, float scale, int Xframes = 1, int Yframes = 1, float fps = 5);
 	~MapElement();
 
 	MapElements Name;
@@ -38,6 +38,7 @@ public:
 	int framesizeX;
 	int framesizeY;
 	int frames;
+	float FPS;
 
 
 };

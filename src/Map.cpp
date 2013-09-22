@@ -93,8 +93,8 @@ void Map::CreateMapElements()
 	_mapElementList.push_back(new MapElement(MapElements::Swamp, textures["swamp"],	
 		30, 300, 1.0f));
 	_mapElementList.push_back(new MapElement(MapElements::Volcano, textures["volcano"],	
-		0, 0, 1.0f));
+		0, 0, 1.0f, 4, 1, 3));
 
-	_mapElementList.push_back(new MapElement(	MapElements::Character, textures["character"],
-		5, 150, 0.5f, 4, 4));
+	_mapElementList.push_back(new MapElement(MapElements::Character, textures["character"],
+		5, 150, 0.5f, 4, 4, 12));
 }
