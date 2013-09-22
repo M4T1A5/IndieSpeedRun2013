@@ -97,3 +97,8 @@ void Map::CreateMapElements()
 	//_mapElementList.push_back(new MapElement(MapElements::Character, textures["character"],
 	//	5, 150, 0.5f, 4, 4, 12));
 }
+
+void Map::Reset()
+{
+
+}

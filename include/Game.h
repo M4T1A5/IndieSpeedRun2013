@@ -37,8 +37,10 @@ public:
 	~Game();
 
 	void Update(const double& dt);
-	void Draw(EGEMotor::Viewport& viewport);	
+	void Draw(EGEMotor::Viewport& viewport);
 private:
+	void reset();
+
 	EGEMotor::Font* font;
 	EGEMotor::Text *resourceText, *healthText;
 

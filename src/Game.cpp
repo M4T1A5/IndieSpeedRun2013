@@ -108,6 +108,9 @@ void Game::Update(const double& dt)
 	Vector windowSize = viewport->getWindowSize();
 	Vector mousePos = input->getMousePosition();
 
+	if(input->isButtonPressed(MouseRight))
+		health = 0;
+
 	switch (gameState)
 	{
 	case MENU:
@@ -219,7 +222,7 @@ void Game::Update(const double& dt)
 			if (_villages[i]->Clock > _villages[i]->NextVillager)
 			{
 				_villages[i]->Clock -= _villages[i]->NextVillager;
-				_villages[i]->NextVillager = (rand()%10)/Difficulty;
+				_villages[i]->NextVillager = (rand()%5)/Difficulty;
 				_explorers.push_back(new Explorer(&_explorerTexture,16,
 					_explorerTexture.getTextureSize().x/4.0f,
 					_explorerTexture.getTextureSize().y/4.0f,
@@ -287,6 +290,9 @@ void Game::Update(const double& dt)
 
 			//for ()particleEngine->m_particles.size
 		}
+
+		if(health == 0)
+			reset();
 		break;
 	case PAUSE:
 		break;
@@ -340,4 +346,13 @@ void Game::Draw(EGEMotor::Viewport& viewport)
 		
 	viewport.renderSprites();
 
+}
+
+void Game::reset()
+{
+	health = 5;
+	resources = 6;
+	gameState = MENU;
+	_villages.empty();
+	_explorers.empty();
 }

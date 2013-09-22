@@ -25,6 +25,8 @@ public:
 	sf::Color GetPixel(EGEMath::Vector pos);
 
 	EGEMath::Vector GetSize() { return size; }
+
+	void Reset();
 private:
 	sf::Image riverImage;
 	std::vector<std::vector<Element*>> _mapElements;
