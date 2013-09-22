@@ -246,8 +246,28 @@ void Game::Update(const double& dt)
 					}
 				}
 			}
-
-			//for ()particleEngine->m_particles.size
+			
+			for (int j=0; j<particleEngine->m_TornadoParticles.size();++j)
+			{
+				if ((_explorers[i]->getPosition()-particleEngine->m_TornadoParticles[j]->m_position).getLenght() < particleEngine->m_TornadoParticles[j]->AreaOfEffect)
+				{
+					_explorers[i]->setPosition(particleEngine->m_TornadoParticles[j]->m_position);
+				}
+			}
+			for (int j=0; j<particleEngine->m_BugParticles.size();++j)
+			{
+				if ((_explorers[i]->getPosition()-particleEngine->m_TornadoParticles[j]->m_position).getLenght() < particleEngine->m_TornadoParticles[j]->AreaOfEffect)
+				{
+					_explorers[i]->poison = true;
+				}
+			}
+			for (int j=0; j<particleEngine->m_CatParticles.size();++j)
+			{
+				if ((_explorers[i]->getPosition()-particleEngine->m_TornadoParticles[j]->m_position).getLenght() < particleEngine->m_TornadoParticles[j]->AreaOfEffect)
+				{
+					_explorers[i]->dead = true;
+				}
+			}
 		}
 
 
