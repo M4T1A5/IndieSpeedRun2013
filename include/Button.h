@@ -1,6 +1,8 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
+#include <Particle.h>
+#include <MapElements.h>
 #include <Sprite.h>
 #include <Animation.h>
 #include <Input.h>
@@ -18,6 +20,9 @@ public:
 	void draw(EGEMotor::Viewport& viewport);
 	bool isPressed();
 	bool mouseOver();
+
+	MapElements elementToSpawn;
+	Hazard hazardToSpawn;
 
 private:
 	EGEMotor::Input* m_input;

@@ -4,7 +4,7 @@ using namespace EGEMath;
 using namespace EGEMotor;
 
 GUIButton::GUIButton(Texture* texture, Vector position, Rectangle crop,
-		Input* input)
+	Input* input)
 {
 	m_input = input;
 	setPosition(position);

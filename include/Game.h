@@ -50,6 +50,9 @@ private:
 
 	std::vector<GUIButton*> buttons;
 
+	MapElements spawnElement;
+	Hazard spawnHazard;
+
 	
 	float Difficulty;
 	float _clock;
