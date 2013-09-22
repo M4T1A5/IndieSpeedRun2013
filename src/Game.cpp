@@ -90,7 +90,7 @@ void Game::Update(const double& dt)
 		if(input->isButtonPressed(Button::MouseLeft))
 		{
 			map.AddElement(Forest, input->getMousePositionOnMap());
-			//particleEngine->addTest(Vector(input->getMousePositionOnMap()),Vector(1.0f,0));
+			particleEngine->addTest(Vector(input->getMousePositionOnMap()),Vector(5.0f,5.0f));
 
 		}
 		else if(input->isButtonPressed(Button::MouseRight))
