@@ -1,11 +1,14 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <vector>
+#include <Button.h>
 #include <Viewport.h>
 #include <Map.h>
 #include <Input.h>
 #include <Camera.h>
 #include <Village.h>
+#include <ParticleEngine.h>
 #include <Explorer.h>
 
 class Game
@@ -24,7 +27,13 @@ public:
 	void Update(const double& dt);
 	void Draw(EGEMotor::Viewport& viewport);	
 private:
+	// Menu crap
+	EGEMotor::Texture *menuTexture, *startTexture;
+	GameObject menu;
+	GUIButton* startButton;
+
 	Map map;
+	EGEMotor::ParticleEngine* particleEngine;
 	EGEMotor::Input* input;
 	EGEMotor::Camera* camera;
 	EGEMotor::Viewport* viewport;
@@ -35,6 +44,12 @@ private:
 	EGEMotor::Texture _explorerTexture;
 	std::vector<Village*> _villages;
 	std::vector<Explorer*> _explorers;
+	
+	EGEMotor::Texture *sidebarTexture, *buttonTexture;
+	GameObject sidebar;
+
+	std::vector<GUIButton*> buttons;
+
 	
 	float Difficulty;
 	float _clock;
