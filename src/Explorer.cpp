@@ -34,7 +34,7 @@ void Explorer::Update(float dt, Vector destination)
 	setLayer(CountLayer(getPosition().y)-6);
 
 	if (poison)
-		diseased += dt*20.0f;
+		diseased += dt*10.0f;
 	if (diseased > 0)
 	{
 		diseased += dt*1.0f;

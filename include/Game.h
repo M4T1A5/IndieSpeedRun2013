@@ -31,11 +31,11 @@ public:
 		MENU,
 		WARMUP,
 		PLAY,
-		PAUSE
+		PAUSE,
+		GAMEOVER
 	};
 	Game(EGEMotor::Viewport& viewport, EGEMotor::Input &input);
 	~Game();
-
 	void Update(const double& dt);
 	void Draw(EGEMotor::Viewport& viewport);
 private:
@@ -54,6 +54,9 @@ private:
 	std::vector<EGEMotor::Texture*> tutorialTexture;
 	std::vector<GameObject*> tutorial;
 	int tutorialNumber;
+
+	EGEMotor::Texture* gameOverTexture;
+	GameObject gameOver;
 
 	Map map;
 	EGEMotor::ParticleEngine* particleEngine;

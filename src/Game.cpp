@@ -1,5 +1,6 @@
 #include <Game.h>
 #include <time.h>
+#include <stdlib.h>
 
 using namespace EGEMath;
 using namespace EGEMotor;
@@ -46,6 +47,11 @@ Game::Game(Viewport& viewport, Input &input)
 		Rectangle(Vector(), startTexture->getTextureSize()), &input);
 	startButton->setOriginPoint(5);
 
+	gameOverTexture = new Texture("game over.png");
+	gameOver.setTexture(gameOverTexture);
+	gameOver.setPosition(startButton->getPosition());
+	gameOver.setOriginPoint(5);
+
 	tutorialNumber = 0;
 	for(int i = 0; i < 5; ++i)
 	{
@@ -83,7 +89,6 @@ Game::Game(Viewport& viewport, Input &input)
 	buttons[3]->hazardToSpawn = cat;
 	buttons[4]->hazardToSpawn = bug;
 	buttons[5];
-
 	particleEngine = new ParticleEngine();
 }
 
@@ -105,11 +110,9 @@ Game::~Game()
 // Public
 void Game::Update(const double& dt)
 {
+	char merkkijono[20];
 	Vector windowSize = viewport->getWindowSize();
 	Vector mousePos = input->getMousePosition();
-
-	if(input->isButtonPressed(MouseRight))
-		health = 0;
 
 	switch (gameState)
 	{
@@ -139,7 +142,6 @@ void Game::Update(const double& dt)
 		}
 		break;
 	case WARMUP:
-		char merkkijono[20];
 		sprintf(merkkijono, "Resources: %d", resources);
 		resourceText->setString(merkkijono);
 		resourceText->updateOrigin();
@@ -317,9 +319,13 @@ void Game::Update(const double& dt)
 		}
 
 		if(health == 0)
-			reset();
+			gameState = GAMEOVER;
 		break;
 	case PAUSE:
+		break;
+	case GAMEOVER:
+		if(input->isButtonPressed(MouseLeft))
+			exit(0);
 		break;
 	}
 
@@ -366,11 +372,14 @@ void Game::Draw(EGEMotor::Viewport& viewport)
 		viewport.draw(healthText);
 		viewport.renderSprites();
 		break;
+	case GAMEOVER:
+		gameOver.Draw(viewport);
+		viewport.renderSprites();
+		break;
 	}
 	particleEngine->Draw(&viewport);
 		
 	viewport.renderSprites();
-
 }
 
 void Game::reset()
