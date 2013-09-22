@@ -33,6 +33,18 @@ Game::Game(Viewport& viewport, Input &input)
 		Rectangle(Vector(), startTexture->getTextureSize()), &input);
 	startButton->setOriginPoint(5);
 
+	tutorialNumber = 0;
+	for(int i = 0; i < 5; ++i)
+	{
+		char merkkijono[20];
+		sprintf(merkkijono, "tutorial-%d.png", i+1);
+		tutorialTexture.push_back(new Texture(merkkijono));
+
+		tutorial.push_back(new GameObject(tutorialTexture[i]));
+		tutorial[i]->setPosition(Vector(-1000,-1000));
+		tutorial[i]->setOriginPoint(5);
+	}
+
 
 	// Sidebar
 	sidebarTexture = new Texture("sidebar2.png");
@@ -71,6 +83,8 @@ Game::~Game()
 	delete sidebarTexture;
 	delete buttonTexture;
 
+	tutorialTexture.empty();
+	tutorial.empty();
 	buttons.empty();
 }
 
@@ -84,8 +98,29 @@ void Game::Update(const double& dt)
 	switch (gameState)
 	{
 	case MENU:
-		if (startButton->isPressed())
-			gameState = PLAY;
+		if (tutorialNumber == 0 && startButton->isPressed() )
+		{
+			tutorial[tutorialNumber]->setPosition(startButton->getPosition());
+			tutorialNumber++;
+		}
+		if(tutorialNumber > 0 && tutorialNumber < tutorial.size())
+		{
+			if(input->isButtonPressed(MouseLeft))
+			{
+				tutorial[tutorialNumber]->setPosition(startButton->getPosition());
+				tutorialNumber++;
+			}
+		}
+		if(tutorialNumber == tutorial.size())
+		{
+			if(input->isButtonPressed(MouseLeft))
+			{
+				for(int i = 0; i < tutorial.size(); ++i)
+				tutorial[i]->setPosition(Vector(-1000,-1000));
+
+				gameState = WARMUP;
+			}			
+		}
 		break;
 	case PLAY:
 	case WARMUP:
@@ -239,6 +274,10 @@ void Game::Draw(EGEMotor::Viewport& viewport)
 	case MENU:
 		menu.Draw(viewport);
 		startButton->draw(viewport);
+
+		for(int i = 0; i < tutorial.size(); ++i)
+			tutorial[i]->Draw(viewport);
+
 		viewport.renderSprites();
 		break;
 	case PAUSE:

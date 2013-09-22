@@ -42,6 +42,9 @@ private:
 	EGEMotor::Texture *menuTexture, *startTexture;
 	GameObject menu;
 	GUIButton* startButton;
+	std::vector<EGEMotor::Texture*> tutorialTexture;
+	std::vector<GameObject*> tutorial;
+	int tutorialNumber;
 
 	Map map;
 	EGEMotor::ParticleEngine* particleEngine;
