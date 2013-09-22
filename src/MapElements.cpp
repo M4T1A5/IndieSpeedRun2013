@@ -15,7 +15,9 @@ MapElement::MapElement(MapElements name, EGEMotor::Texture *texture,
 	frames = Xframes*Yframes;
 }
 MapElement::~MapElement()
-{}
+{
+	delete Texture;
+}
 
 
 
@@ -36,4 +38,7 @@ Element::Element(EGEMath::Vector Position, MapElement* mapElement)
 	}
 
 }
-Element::~Element(){}
+Element::~Element()
+{
+	delete _mapElement;
+}
