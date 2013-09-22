@@ -101,5 +101,8 @@ void Map::CreateMapElements()
 
 void Map::Reset()
 {
-
+	_mapElementList.empty();
+	AddElement(MapElements::Background);
+	//AddElement(MapElements::River);
+	AddElement(MapElements::Volcano,Vector(1800,450));
 }

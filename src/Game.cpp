@@ -375,4 +375,5 @@ void Game::reset()
 	gameState = MENU;
 	_villages.empty();
 	_explorers.empty();
+	map.Reset();
 }
