@@ -15,6 +15,7 @@ GameObject::GameObject(EGEMotor::Texture* texture)
 
 GameObject::~GameObject()
 {
+	Sprite::~Sprite();
 }
 
 

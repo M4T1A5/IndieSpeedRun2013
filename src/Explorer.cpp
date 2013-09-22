@@ -7,7 +7,10 @@ Explorer::Explorer(EGEMotor::Texture* spriteSheet, int Frames, int FramesizeX, i
 	: AnimatedGameObject(spriteSheet,Frames,FramesizeX,FramesizeY,Fps),
 	  clock(0),
 	  nextTurn(rand()%40/10.0f),
-	  slowed(false)
+	  slowed(false),
+	  poison(false),
+	  diseased(0),
+	  dead(false)
 {
 	setPosition(position);
 	setOriginPoint(2);
@@ -19,7 +22,9 @@ Explorer::Explorer(EGEMotor::Texture* spriteSheet, int Frames, int FramesizeX, i
 }
 
 Explorer::~Explorer()
-{}
+{
+	AnimatedGameObject::~AnimatedGameObject();
+}
 
 void Explorer::Update(float dt, Vector destination)
 {
@@ -27,6 +32,20 @@ void Explorer::Update(float dt, Vector destination)
 	AnimatedGameObject::Update(dt);
 	slowed = false;
 	setLayer(CountLayer(getPosition().y)-6);
+
+	if (poison)
+		diseased += dt*20.0f;
+	if (diseased > 0)
+	{
+		diseased += dt*1.0f;
+		if (diseased > 100)
+			dead = true;
+		setColor(255
+				,255 *(1-diseased/100.0f)
+				,255 *(1-diseased/100.0f)
+				,255);
+	}
+
 }
 void Explorer::Draw(EGEMotor::Viewport& viewport)
 {
@@ -48,7 +67,7 @@ void Explorer::move(const double& dt)
 		volcano += _targetPos - getPosition();
 		volcano.Normalize();
 	}
-	_direction += volcano*dt*15;
+	_direction += volcano*dt*150;
 	Vector move = _direction;
 	move.Normalize();
 	if (slowed)

@@ -236,6 +236,8 @@ void Game::Update(const double& dt)
 							.getLenght()< map._mapElementList[j]->Radius)
 						{
 							_explorers[i]->slowed=true;
+							_explorers[i]->poison=true;
+
 							if (activeButton[SWAMP])
 							{
 							}
@@ -268,6 +270,9 @@ void Game::Update(const double& dt)
 					_explorers[i]->dead = true;
 				}
 			}
+
+			if (_explorers[i]->dead)
+				_explorers.erase(_explorers.begin() + i);
 		}
 
 
