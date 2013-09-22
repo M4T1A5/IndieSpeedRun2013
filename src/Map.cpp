@@ -12,7 +12,7 @@ Map::Map()
 	textures["river"] = new Texture("joet.png");
 	textures["forest"] = new Texture("forest.png");
 	textures["swamp"] = new Texture("swamp.png");
-	textures["character"] = new Texture("arke_sheet.png");
+	//textures["character"] = new Texture("arke_sheet.png");
 	textures["volcano"] = new Texture("volcano.png");
 	CreateMapElements();
 	AddElement(MapElements::Background);
@@ -70,9 +70,9 @@ void Map::AddElement(MapElements mapElement, Vector pos)
 	case MapElements::Volcano:
 		element = new Element(pos,_mapElementList[Volcano]);
 		break;
-	case MapElements::Character:
-		element = new Element(pos,_mapElementList[Character]);
-		break;
+	//case MapElements::Character:
+	//	element = new Element(pos,_mapElementList[Character]);
+	//	break;
 	}
 	_mapElements[mapElement].push_back(element);
 }
@@ -95,6 +95,6 @@ void Map::CreateMapElements()
 	_mapElementList.push_back(new MapElement(MapElements::Volcano, textures["volcano"],	
 		0, 0, 1.0f, 4, 1, 3));
 
-	_mapElementList.push_back(new MapElement(MapElements::Character, textures["character"],
-		5, 150, 0.5f, 4, 4, 12));
+	//_mapElementList.push_back(new MapElement(MapElements::Character, textures["character"],
+	//	5, 150, 0.5f, 4, 4, 12));
 }

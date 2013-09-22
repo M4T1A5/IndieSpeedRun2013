@@ -7,7 +7,9 @@
 #include <Map.h>
 #include <Input.h>
 #include <Camera.h>
+#include <Village.h>
 #include <ParticleEngine.h>
+#include <Explorer.h>
 
 class Game
 {
@@ -37,10 +39,21 @@ private:
 	EGEMotor::Viewport* viewport;
 	GameState gameState;
 
+	EGEMotor::Texture _townTexture;
+	EGEMotor::Texture _villageTexture;
+	EGEMotor::Texture _explorerTexture;
+	std::vector<Village*> _villages;
+	std::vector<Explorer*> _explorers;
+	
 	EGEMotor::Texture *sidebarTexture, *buttonTexture;
 	GameObject sidebar;
 
 	std::vector<GUIButton*> buttons;
+
+	
+	float Difficulty;
+	float _clock;
+
 };
 
 #endif
