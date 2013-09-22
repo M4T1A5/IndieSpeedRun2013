@@ -26,6 +26,7 @@ void Explorer::Update(float dt, Vector destination)
 	clock += dt;
 	AnimatedGameObject::Update(dt);
 	slowed = false;
+	setLayer(CountLayer(getPosition().y)-6);
 }
 void Explorer::Draw(EGEMotor::Viewport& viewport)
 {

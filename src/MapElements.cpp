@@ -26,6 +26,7 @@ Element::Element(EGEMath::Vector Position, MapElement* mapElement)
 {
 	SetSpeed(mapElement->Speed);
 	setPosition(Position);
+	setLayer(EGEMotor::CountLayer(Position.y));
 	SetTarget(Position);
 	setScale(mapElement->Scale);
 

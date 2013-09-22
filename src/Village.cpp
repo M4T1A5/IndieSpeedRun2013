@@ -10,6 +10,8 @@ Village::Village(Texture* texture, Vector position)
 {
 	setPosition(position);
 	setScale(2.0f);
+	setOriginPoint(2);
+	setLayer(CountLayer(position.y - 70)); // layer offset -20
 }
 Village::~Village()
 {}
