@@ -63,7 +63,7 @@ void ParticleEngine::addBug(EGEMath::Vector Position, EGEMath::Vector Direction)
 
 void ParticleEngine::addCat(EGEMath::Vector Position, EGEMath::Vector Direction)
 {
-	auto *particle = new Cat(Position,Direction,Vector(0.6,0.6),m_catTexture);
+	auto *particle = new Cat(Position,Direction,Vector(-0.6,0.6),m_catTexture);
 	m_particles.push_back(particle);
 	m_CatParticles.push_back(particle);
 }
