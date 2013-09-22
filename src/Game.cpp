@@ -111,7 +111,10 @@ void Game::Update(const double& dt)
 		for(int i = 2; i < 5; ++i)
 		{
 			if(buttons[i]->isPressed())
+			{
 				spawnHazard = buttons[i]->hazardToSpawn;
+				spawnElement = Background;
+			}
 		}
 
 		if(spawnElement > 0 && input->isButtonPressed(Button::MouseLeft))
@@ -164,7 +167,7 @@ void Game::Update(const double& dt)
 
 			for (int j=0; j<map._mapElements.size();++j)
 			{
-				for (int k=0; k<map._mapElements.size();++k)
+				for (int k=0; k<map._mapElements[j].size();++k)
 				{
 					switch(j)
 					{
@@ -181,6 +184,9 @@ void Game::Update(const double& dt)
 						}
 						break;
 					case Forest:
+						_explorers[i]->getPosition();
+						map._mapElements[j][k]->getPosition();
+
 						if ((_explorers[i]->getPosition()-map._mapElements[j][k]->getPosition())
 							.getLenght()< map._mapElementList[j]->Radius)
 							_explorers[i]->slowed=true;
