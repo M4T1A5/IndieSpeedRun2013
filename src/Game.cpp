@@ -11,6 +11,19 @@ Game::Game(Viewport& viewport, Input &input)
 	  _clock(0),
 	  Difficulty(1)
 {
+	font = new Font("square.ttf");
+	resourceText = new Text("", font);
+	resourceText->setPosition(Vector(viewport.getWindowSize().x - 75, 0));
+	resourceText->setOriginPoint(9);
+	resourceText->setLayer(295);
+	resources = 6;
+
+	health = 5;
+	healthText = new Text("", font);
+	healthText->setPosition(Vector(viewport.getWindowSize().x - 75, 30));
+	healthText->setOriginPoint(9);
+	healthText->setLayer(295);
+
 	activeButton[FOREST]=false;
 	activeButton[SWAMP]=false;
 	activeButton[HURRICANE]=false;
@@ -94,6 +107,9 @@ void Game::Update(const double& dt)
 	Vector windowSize = viewport->getWindowSize();
 	Vector mousePos = input->getMousePosition();
 
+	if(input->isButtonPressed(MouseRight))
+		health = 0;
+
 	switch (gameState)
 	{
 	case MENU:
@@ -121,12 +137,18 @@ void Game::Update(const double& dt)
 			}			
 		}
 		break;
-	case PLAY:
 	case WARMUP:
+		char merkkijono[20];
+		sprintf(merkkijono, "Resources: %d", resources);
+		resourceText->setString(merkkijono);
+		resourceText->updateOrigin();
+		sprintf(merkkijono, "Health: %d", health);
+		healthText->setString(merkkijono);
+		healthText->updateOrigin();
+
 		_clock += dt;
 		
 		if((windowSize.x - mousePos.x) < 5 || mousePos.x < 5)
-
 		{
 			camera->FollowMouse(dt);
 		}
@@ -139,6 +161,32 @@ void Game::Update(const double& dt)
 		{
 			if(buttons[i]->isPressed())
 				spawnElement = buttons[i]->elementToSpawn;
+		}		
+
+		if(spawnElement > 0 && input->isButtonPressed(Button::MouseLeft) && resources > 0)
+		{
+			map.AddElement(spawnElement, input->getMousePositionOnMap());
+			resources--;
+
+		}	
+
+		if (_clock > 10)
+		{
+			_clock=0;
+			gameState = PLAY;
+		}
+		break;
+	case PLAY:
+		sprintf(merkkijono, "Health: %d", health);
+		healthText->setString(merkkijono);
+		healthText->updateOrigin();
+		if((windowSize.x - mousePos.x) < 5 || mousePos.x < 5)
+		{
+			camera->FollowMouse(dt);
+		}
+		else if((windowSize.y - mousePos.y) < 5 || mousePos.y < 5)
+		{
+			camera->FollowMouse(dt);
 		}
 
 		for(int i = 2; i < 5; ++i)
@@ -150,13 +198,7 @@ void Game::Update(const double& dt)
 			}
 		}
 
-		if(spawnElement > 0 && input->isButtonPressed(Button::MouseLeft))
-		{
-			map.AddElement(spawnElement, input->getMousePositionOnMap());
-
-		}
-
-		else if(spawnHazard >= 0 && input->isButtonPressed(Button::MouseLeft) )
+		if(spawnHazard >= 0 && input->isButtonPressed(Button::MouseLeft) )
 		{
 			switch(spawnHazard)
 			{
@@ -173,30 +215,23 @@ void Game::Update(const double& dt)
 
 		}
 
-		if (_clock > 30)
-		{
-			_clock=0;
-			gameState = PLAY;
-		}
-
 		for (int i=0; i<_villages.size(); ++i)
 		{
 			_villages[i]->Update(dt);
 			if (_villages[i]->Clock > _villages[i]->NextVillager)
 			{
 				_villages[i]->Clock -= _villages[i]->NextVillager;
-				_villages[i]->NextVillager = (rand()%10)/Difficulty;
+				_villages[i]->NextVillager = (rand()%5)/Difficulty;
 				_explorers.push_back(new Explorer(&_explorerTexture,16,
 					_explorerTexture.getTextureSize().x/4.0f,
 					_explorerTexture.getTextureSize().y/4.0f,
 					12,_villages[i]->getPosition()));
 			}
 		}
-		
+
 		for (int i=0; i<_explorers.size(); ++i)
 		{
 			_explorers[i]->Update(dt, map._mapElements[Volcano][0]->getPosition());
-
 
 			for (int j=0; j<map._mapElements.size();++j)
 			{
@@ -235,21 +270,53 @@ void Game::Update(const double& dt)
 							.getLenght()< map._mapElementList[j]->Radius)
 						{
 							_explorers[i]->slowed=true;
+							_explorers[i]->poison=true;
+
 							if (activeButton[SWAMP])
 							{
 							}
 						}
 						break;
 					case Volcano:
+						if(map._mapElements[j][k]->
+							getGlobalBounds().contains(_explorers[i]->getPosition()))
+						{
+							health--;
+							_explorers.erase(_explorers.begin() + i);
+						}
 						break;
 					}
 				}
 			}
+			
+			for (int j=0; j<particleEngine->m_TornadoParticles.size();++j)
+			{
+				if ((_explorers[i]->getPosition()-particleEngine->m_TornadoParticles[j]->m_position).getLenght() < particleEngine->m_TornadoParticles[j]->AreaOfEffect)
+				{
+					_explorers[i]->setPosition(particleEngine->m_TornadoParticles[j]->m_position);
+				}
+			}
+			for (int j=0; j<particleEngine->m_BugParticles.size();++j)
+			{
+				if ((_explorers[i]->getPosition()-particleEngine->m_TornadoParticles[j]->m_position).getLenght() < particleEngine->m_TornadoParticles[j]->AreaOfEffect)
+				{
+					_explorers[i]->poison = true;
+				}
+			}
+			for (int j=0; j<particleEngine->m_CatParticles.size();++j)
+			{
+				if ((_explorers[i]->getPosition()-particleEngine->m_TornadoParticles[j]->m_position).getLenght() < particleEngine->m_TornadoParticles[j]->AreaOfEffect)
+				{
+					_explorers[i]->dead = true;
+				}
+			}
 
-			//for ()particleEngine->m_particles.size
+			if (_explorers[i]->dead)
+				_explorers.erase(_explorers.begin() + i);
 		}
 
-
+		if(health == 0)
+			reset();
 		break;
 	case PAUSE:
 		break;
@@ -294,6 +361,8 @@ void Game::Draw(EGEMotor::Viewport& viewport)
 			buttons[i]->draw(viewport);
 		}
 		sidebar.Draw(viewport);
+		viewport.draw(resourceText);
+		viewport.draw(healthText);
 		viewport.renderSprites();
 		break;
 	}
@@ -301,4 +370,14 @@ void Game::Draw(EGEMotor::Viewport& viewport)
 		
 	viewport.renderSprites();
 
+}
+
+void Game::reset()
+{
+	health = 5;
+	resources = 6;
+	gameState = MENU;
+	_villages.empty();
+	_explorers.empty();
+	map.Reset();
 }

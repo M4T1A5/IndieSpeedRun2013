@@ -57,7 +57,7 @@ bool Tornado::Update(float DeltaTime)
 
 	m_animation->Update(DeltaTime);
 	
-	m_sprite.setPosition(Vector(m_position.x += DeltaTime * 100  , float(m_startY + 50 * sin(PI*(-m_life/m_startLife)))));
+	m_sprite.setPosition(Vector(m_position.x -= DeltaTime * 100  , float(m_startY + 50 * sin(PI*(-m_life/m_startLife)))));
 	if (Particle::Update(DeltaTime))
 	{
 		m_timer -= DeltaTime;
@@ -80,7 +80,7 @@ void Tornado::setColor(int R,int G,int B,int A)
 Bug::Bug(Vector position, Vector direction, Vector scale, Texture* texture)
 	: Particle(position,Vector(direction.x/5.0f,-direction.y/5.0f),scale,texture,5.0f)
 {
-	m_direction = Vector(direction.x/5.0f,-direction.y/5.0f);
+	m_direction = Vector(direction.x/-5.0f,-direction.y/5.0f);
 	m_animation = new Animation(&m_sprite,3,200,200, 20);
 	m_sprite.setOrigin(m_sprite.getSize()/2);
 	m_sprite.setColor(255,255,255,255);
@@ -92,20 +92,19 @@ Bug::Bug(Vector position, Vector direction, Vector scale, Texture* texture)
 	m_sprite.setLayer(285);
 	//m_sprite.setColor(1,1,1,1);
 
-	m_life = 10;
+	m_life = 5;
 }
 
 bool Bug::Update(float DeltaTime)
 {
-	Particle::Update(DeltaTime);
 	m_animation->Update(DeltaTime);	
-	return false;
+	return Particle::Update(DeltaTime);
 }
 
 Cat::Cat(Vector position, Vector direction, Vector scale, Texture* texture)
 	: Particle(position,Vector(direction.x/5.0f,-direction.y/5.0f),scale,texture,5.0f)
 {
-	m_direction = Vector(direction.x/5.0f,-direction.y/5.0f);
+	m_direction = Vector(direction.x/-5.0f,-direction.y/5.0f);
 	m_sprite.setOrigin(m_sprite.getSize()/2);
 	m_sprite.setColor(255,255,255,255);
 	if (direction.x > 0)

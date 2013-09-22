@@ -48,6 +48,7 @@ private:
 	void setColor(int R = 255,int G = 255,int B = 255,int A = 255);
 	Animation* m_animation;
 	float m_timer, m_startY, m_r, m_g, m_b, m_a;
+	friend class Game;
 };
 
 class Bug : public Particle

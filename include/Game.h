@@ -10,6 +10,7 @@
 #include <Village.h>
 #include <ParticleEngine.h>
 #include <Explorer.h>
+#include <Text.h>
 
 enum ActivateButton
 {
@@ -35,8 +36,16 @@ public:
 	Game(EGEMotor::Viewport& viewport, EGEMotor::Input &input);
 	~Game();
 	void Update(const double& dt);
-	void Draw(EGEMotor::Viewport& viewport);	
+	void Draw(EGEMotor::Viewport& viewport);
 private:
+	void reset();
+
+	EGEMotor::Font* font;
+	EGEMotor::Text *resourceText, *healthText;
+
+	int resources;
+	int health;
+
 	// Menu crap
 	EGEMotor::Texture *menuTexture, *startTexture;
 	GameObject menu;

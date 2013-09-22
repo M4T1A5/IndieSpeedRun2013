@@ -16,6 +16,7 @@ Map::Map()
 	textures["volcano"] = new Texture("volcano.png");
 	CreateMapElements();
 	AddElement(MapElements::Background);
+	//AddElement(MapElements::River);
 	AddElement(MapElements::Volcano,Vector(1800,450));
 }
 
@@ -91,9 +92,17 @@ void Map::CreateMapElements()
 	_mapElementList.push_back(new MapElement(MapElements::Forest, textures["forest"],		
 		60, 300, 0.6f));
 	_mapElementList.push_back(new MapElement(MapElements::Swamp, textures["swamp"],	
-		50, 300, 1.0f,2,1,1));
+		75, 300, 1.0f,2,1,1));
 	_mapElementList.push_back(new MapElement(MapElements::Volcano, textures["volcano"],	
 		0, 0, 1.0f, 4, 1, 3));
 	//_mapElementList.push_back(new MapElement(MapElements::Character, textures["character"],
 	//	5, 150, 0.5f, 4, 4, 12));
+}
+
+void Map::Reset()
+{
+	_mapElementList.empty();
+	AddElement(MapElements::Background);
+	//AddElement(MapElements::River);
+	AddElement(MapElements::Volcano,Vector(1800,450));
 }

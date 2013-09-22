@@ -65,6 +65,8 @@ private:
 	friend class Viewport;
 };
 
+unsigned int CountLayer(float YCoordinate);
+
 }
 
 #endif

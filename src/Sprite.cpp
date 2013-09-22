@@ -199,4 +199,9 @@ Rectangle Sprite::getGlobalBounds()
 	return Rectangle(m_sprite->getGlobalBounds());
 }
 
+unsigned int CountLayer(float YCoordinate)
+{
+	return YCoordinate/10.0f;
+}
+
 }

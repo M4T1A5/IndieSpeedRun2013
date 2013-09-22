@@ -13,6 +13,7 @@ AnimatedGameObject::AnimatedGameObject(Texture* spriteSheet, int Frames, int Fra
 
 AnimatedGameObject::~AnimatedGameObject()
 {
+	GameObject::~GameObject();
 	delete animation;
 }
 
