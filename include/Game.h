@@ -9,7 +9,6 @@
 #include <Camera.h>
 #include <Village.h>
 #include <ParticleEngine.h>
-#include <SFML\Audio.hpp>
 #include <Explorer.h>
 
 enum ActivateButton
@@ -35,8 +34,6 @@ public:
 	};
 	Game(EGEMotor::Viewport& viewport, EGEMotor::Input &input);
 	~Game();
-	sf::SoundBuffer buffer;
-	sf::Sound sound;
 	void Update(const double& dt);
 	void Draw(EGEMotor::Viewport& viewport);	
 private:

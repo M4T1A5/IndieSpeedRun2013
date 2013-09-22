@@ -70,8 +70,6 @@ Game::Game(Viewport& viewport, Input &input)
 	buttons[3]->hazardToSpawn = cat;
 	buttons[4]->hazardToSpawn = bug;
 	buttons[5];
-	buffer.loadFromFile("assets/sound.wav");
-	sound.setBuffer(buffer);
 	particleEngine = new ParticleEngine();
 }
 
@@ -164,7 +162,6 @@ void Game::Update(const double& dt)
 			{
 			case tornado:
 				particleEngine->addTornado(input->getMousePositionOnMap(), Vector(1,1));
-				sound.play();
 				break;
 			case cat:
 				particleEngine->addCat(input->getMousePositionOnMap(), Vector(100,1));
