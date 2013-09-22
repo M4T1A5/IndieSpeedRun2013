@@ -72,6 +72,11 @@ void Animation::ChangeAnimation(int FirstFrameofLoop, int FramesinLoop, int Anim
 	setVisibleFrame();
 }
 
+void Animation::SetFPS(float FPS)
+{
+	m_fps = FPS;
+}
+
 void Animation::setVisibleFrame()
 {
 

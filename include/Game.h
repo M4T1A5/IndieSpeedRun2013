@@ -12,6 +12,17 @@
 #include <SFML\Audio.hpp>
 #include <Explorer.h>
 
+enum ActivateButton
+{
+	FOREST,
+	SWAMP,
+	HURRICANE,
+	BUG,
+	CAT,
+	RIVER,
+	ACTIVATEBUTTONCOUNT
+};
+
 class Game
 {
 public:
@@ -33,6 +44,9 @@ private:
 	EGEMotor::Texture *menuTexture, *startTexture;
 	GameObject menu;
 	GUIButton* startButton;
+	std::vector<EGEMotor::Texture*> tutorialTexture;
+	std::vector<GameObject*> tutorial;
+	int tutorialNumber;
 
 	Map map;
 	EGEMotor::ParticleEngine* particleEngine;
@@ -51,6 +65,8 @@ private:
 	GameObject sidebar;
 
 	std::vector<GUIButton*> buttons;
+
+	std::map<ActivateButton,bool> activeButton;
 
 	MapElements spawnElement;
 	Hazard spawnHazard;

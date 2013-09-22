@@ -13,6 +13,7 @@ public:
 	void ChangeAnimation(int FirstFrameofLoop, int FramesinLoop);
 	void ChangeAnimation(int FirstFrameofLoop, int FramesinLoop, int AnimationStartPoint, float Fps = (5.0f));
 	int getCurrentFrame();
+	void SetFPS(float FPS);
 private:
 	void setVisibleFrame();
 

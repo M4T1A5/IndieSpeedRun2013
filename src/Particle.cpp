@@ -81,8 +81,9 @@ Bug::Bug(Vector position, Vector direction, Vector scale, Texture* texture)
 	: Particle(position,Vector(direction.x/5.0f,-direction.y/5.0f),scale,texture,5.0f)
 {
 	m_direction = Vector(direction.x/5.0f,-direction.y/5.0f);
+	m_animation = new Animation(&m_sprite,3,200,200, 20);
 	m_sprite.setOrigin(m_sprite.getSize()/2);
-	m_sprite.setColor(255,255,255,180);
+	m_sprite.setColor(255,255,255,255);
 	if (direction.x > 0)
 	{
 		m_scale.x = -m_scale.x;
@@ -94,12 +95,19 @@ Bug::Bug(Vector position, Vector direction, Vector scale, Texture* texture)
 	m_life = 10;
 }
 
+bool Bug::Update(float DeltaTime)
+{
+	Particle::Update(DeltaTime);
+	m_animation->Update(DeltaTime);	
+	return false;
+}
+
 Cat::Cat(Vector position, Vector direction, Vector scale, Texture* texture)
 	: Particle(position,Vector(direction.x/5.0f,-direction.y/5.0f),scale,texture,5.0f)
 {
 	m_direction = Vector(direction.x/5.0f,-direction.y/5.0f);
 	m_sprite.setOrigin(m_sprite.getSize()/2);
-	m_sprite.setColor(255,255,255,180);
+	m_sprite.setColor(255,255,255,255);
 	if (direction.x > 0)
 	{
 		m_scale.x = -m_scale.x;

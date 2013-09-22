@@ -11,10 +11,17 @@ Game::Game(Viewport& viewport, Input &input)
 	  _clock(0),
 	  Difficulty(1)
 {
+	activeButton[FOREST]=false;
+	activeButton[SWAMP]=false;
+	activeButton[HURRICANE]=false;
+	activeButton[BUG]=false;
+	activeButton[CAT]=false;
+	activeButton[RIVER]=false;
+
 	srand(time(NULL));
 	camera = new Camera(input, viewport, map.GetSize());
 	_townTexture.loadTexture("village.png");
-	//_villageTexture.loadTexture("");
+	_villageTexture.loadTexture("settlement.png");
 	_explorerTexture.loadTexture("arke_sheet.png");
 	_villages.push_back(new Village(&_townTexture,Vector(300,800)));
 
@@ -25,6 +32,18 @@ Game::Game(Viewport& viewport, Input &input)
 	startButton = new GUIButton(startTexture, viewport.getWindowSize() / 2, 
 		Rectangle(Vector(), startTexture->getTextureSize()), &input);
 	startButton->setOriginPoint(5);
+
+	tutorialNumber = 0;
+	for(int i = 0; i < 5; ++i)
+	{
+		char merkkijono[20];
+		sprintf(merkkijono, "tutorial-%d.png", i+1);
+		tutorialTexture.push_back(new Texture(merkkijono));
+
+		tutorial.push_back(new GameObject(tutorialTexture[i]));
+		tutorial[i]->setPosition(Vector(-1000,-1000));
+		tutorial[i]->setOriginPoint(5);
+	}
 
 
 	// Sidebar
@@ -65,6 +84,8 @@ Game::~Game()
 	delete sidebarTexture;
 	delete buttonTexture;
 
+	tutorialTexture.empty();
+	tutorial.empty();
 	buttons.empty();
 }
 
@@ -78,9 +99,29 @@ void Game::Update(const double& dt)
 	switch (gameState)
 	{
 	case MENU:
-		if (startButton->isPressed())
-			gameState = PLAY;
-		break;
+		if (tutorialNumber == 0 && startButton->isPressed() )
+		{
+			tutorial[tutorialNumber]->setPosition(startButton->getPosition());
+			tutorialNumber++;
+		}
+		if(tutorialNumber > 0 && tutorialNumber < tutorial.size())
+		{
+			if(input->isButtonPressed(MouseLeft))
+			{
+				tutorial[tutorialNumber]->setPosition(startButton->getPosition());
+				tutorialNumber++;
+			}
+		}
+		if(tutorialNumber == tutorial.size())
+		{
+			if(input->isButtonPressed(MouseLeft))
+			{
+				for(int i = 0; i < tutorial.size(); ++i)
+				tutorial[i]->setPosition(Vector(-1000,-1000));
+
+				gameState = WARMUP;
+			}			
+		}
 		break;
 	case PLAY:
 	case WARMUP:
@@ -105,7 +146,10 @@ void Game::Update(const double& dt)
 		for(int i = 2; i < 5; ++i)
 		{
 			if(buttons[i]->isPressed())
+			{
 				spawnHazard = buttons[i]->hazardToSpawn;
+				spawnElement = Background;
+			}
 		}
 
 		if(spawnElement > 0 && input->isButtonPressed(Button::MouseLeft))
@@ -155,6 +199,57 @@ void Game::Update(const double& dt)
 		for (int i=0; i<_explorers.size(); ++i)
 		{
 			_explorers[i]->Update(dt, map._mapElements[Volcano][0]->getPosition());
+
+
+			for (int j=0; j<map._mapElements.size();++j)
+			{
+				for (int k=0; k<map._mapElements[j].size();++k)
+				{
+					switch(j)
+					{
+					case Background:
+						break;
+					case River:
+						if (map.GetPixel(_explorers[i]->getPosition()) != sf::Color::Transparent)
+						{
+							_explorers[i]->slowed=true;
+							if (activeButton[RIVER])
+							{
+								_explorers[i]->poison=true;
+							}
+						}
+						break;
+					case Forest:
+						_explorers[i]->getPosition();
+						map._mapElements[j][k]->getPosition();
+
+						if ((_explorers[i]->getPosition()-map._mapElements[j][k]->getPosition())
+							.getLenght()< map._mapElementList[j]->Radius)
+						{
+							_explorers[i]->slowed=true;
+							if (activeButton[FOREST])
+							{
+								if(rand()%10000 > 9999-10000*dt);
+							}
+						}
+						break;
+					case Swamp:
+						if ((_explorers[i]->getPosition()-map._mapElements[j][k]->getPosition())
+							.getLenght()< map._mapElementList[j]->Radius)
+						{
+							_explorers[i]->slowed=true;
+							if (activeButton[SWAMP])
+							{
+							}
+						}
+						break;
+					case Volcano:
+						break;
+					}
+				}
+			}
+
+			//for ()particleEngine->m_particles.size
 		}
 
 
@@ -182,6 +277,10 @@ void Game::Draw(EGEMotor::Viewport& viewport)
 	case MENU:
 		menu.Draw(viewport);
 		startButton->draw(viewport);
+
+		for(int i = 0; i < tutorial.size(); ++i)
+			tutorial[i]->Draw(viewport);
+
 		viewport.renderSprites();
 		break;
 	case PAUSE:

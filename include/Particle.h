@@ -55,6 +55,11 @@ class Bug : public Particle
 public:
 	Bug(EGEMath::Vector Position, EGEMath::Vector Direction, EGEMath::Vector Scale, EGEMotor::Texture* texture);
 	~Bug(){}
+
+	bool Update(float DeltaTime);
+
+private:
+	Animation* m_animation;
 };
 
 class Cat : public Particle

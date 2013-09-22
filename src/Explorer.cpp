@@ -6,9 +6,11 @@ using namespace EGEMotor;
 Explorer::Explorer(EGEMotor::Texture* spriteSheet, int Frames, int FramesizeX, int FramesizeY, float Fps, EGEMath::Vector position)
 	: AnimatedGameObject(spriteSheet,Frames,FramesizeX,FramesizeY,Fps),
 	  clock(0),
-	  nextTurn(rand()%40/10.0f)
+	  nextTurn(rand()%40/10.0f),
+	  slowed(false)
 {
 	setPosition(position);
+	setOriginPoint(2);
 	setLayer(250);
 	_targetPos = Vector(3000,450);
 	_speed = 20;
@@ -23,6 +25,7 @@ void Explorer::Update(float dt, Vector destination)
 {
 	clock += dt;
 	AnimatedGameObject::Update(dt);
+	slowed = false;
 }
 void Explorer::Draw(EGEMotor::Viewport& viewport)
 {
@@ -47,13 +50,11 @@ void Explorer::move(const double& dt)
 	_direction += volcano*dt*15;
 	Vector move = _direction;
 	move.Normalize();
-	move *= dt * _speed;
-
-	if ((_targetPos-getPosition()).getLenght()<move.getLenght())
-	{
-		setPosition(_targetPos);
-		SetSpeed(0);
-	}
+	if (slowed)
+		animation->SetFPS(5);
 	else
-		setPosition(getPosition()+move);
+		animation->SetFPS(12);
+	move *= dt * _speed * (1-slowed*0.7f);
+
+	setPosition(getPosition()+move);
 }
