@@ -11,6 +11,13 @@ Game::Game(Viewport& viewport, Input &input)
 	  _clock(0),
 	  Difficulty(1)
 {
+	activeButton[FOREST]=false;
+	activeButton[SWAMP]=false;
+	activeButton[HURRICANE]=false;
+	activeButton[BUG]=false;
+	activeButton[CAT]=false;
+	activeButton[RIVER]=false;
+
 	srand(time(NULL));
 	camera = new Camera(input, viewport, map.GetSize());
 	_townTexture.loadTexture("village.png");
@@ -121,6 +128,53 @@ void Game::Update(const double& dt)
 		for (int i=0; i<_explorers.size(); ++i)
 		{
 			_explorers[i]->Update(dt, map._mapElements[Volcano][0]->getPosition());
+
+
+			for (int j=0; j<map._mapElements.size();++j)
+			{
+				for (int k=0; k<map._mapElements.size();++k)
+				{
+					switch(j)
+					{
+					case Background:
+						break;
+					case River:
+						if (map.GetPixel(_explorers[i]->getPosition()) != sf::Color::Transparent)
+						{
+							_explorers[i]->slowed=true;
+							if (activeButton[RIVER])
+							{
+								_explorers[i]->poison=true;
+							}
+						}
+						break;
+					case Forest:
+						if ((_explorers[i]->getPosition()-map._mapElements[j][k]->getPosition())
+							.getLenght()< map._mapElementList[j]->Radius)
+							_explorers[i]->slowed=true;
+						{
+							if (activeButton[FOREST])
+							{
+								if(rand()%10000 > 9999-10000*dt);
+							}
+						}
+						break;
+					case Swamp:
+						if ((_explorers[i]->getPosition()-map._mapElements[j][k]->getPosition())
+							.getLenght()< map._mapElementList[j]->Radius)
+							_explorers[i]->slowed=true;
+						if (activeButton[SWAMP])
+						{
+
+						}
+						break;
+					case Volcano:
+						break;
+					}
+				}
+			}
+
+
 		}
 
 

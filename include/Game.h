@@ -11,6 +11,17 @@
 #include <ParticleEngine.h>
 #include <Explorer.h>
 
+enum ActivateButton
+{
+	FOREST,
+	SWAMP,
+	HURRICANE,
+	BUG,
+	CAT,
+	RIVER,
+	ACTIVATEBUTTONCOUNT
+};
+
 class Game
 {
 public:
@@ -49,6 +60,8 @@ private:
 	GameObject sidebar;
 
 	std::vector<GUIButton*> buttons;
+
+	std::map<ActivateButton,bool> activeButton;
 
 	
 	float Difficulty;

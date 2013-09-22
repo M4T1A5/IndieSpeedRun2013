@@ -12,9 +12,19 @@ public:
 
 	void Update(float dt, EGEMath::Vector destination);
 	void Draw(EGEMotor::Viewport& viewport);
+
+	bool slowed;
+	bool dead;
+	bool poison;
+	float diseased; //100 = dead   diseace += dt
+
+
 protected:
 	void move(const double& dt);
 	float clock, nextTurn;
+	
+	
+	
 
 
 };
