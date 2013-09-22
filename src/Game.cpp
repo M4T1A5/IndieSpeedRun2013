@@ -20,18 +20,18 @@ Game::Game(Viewport& viewport, Input &input)
 
 
 	// Sidebar
-	sidebarTexture = new Texture("sidebar.png");
+	sidebarTexture = new Texture("sidebar2.png");
 	sidebar.setTexture(sidebarTexture);
 	Vector sidebarPos = Vector(viewport.getWindowSize().x - sidebarTexture->getTextureSize().x, 0);
 	sidebar.setPosition(sidebarPos);
 	sidebar.setLayer(295);
 
 	// Buttons
-	buttonTexture = new Texture("buttons.png");
-	for(int i = 0; i < 4; ++i)
+	buttonTexture = new Texture("buttons2.png");
+	for(int i = 0; i < 6; ++i)
 	{
-		Vector buttonPos = sidebarPos + Vector(0, i*100);
-		Rectangle crop = Rectangle(Vector(i*150, 0), Vector(150,150));
+		Vector buttonPos = sidebarPos + Vector(0, i*120);
+		Rectangle crop = Rectangle(Vector(i*75, 0), Vector(150,150));
 		auto button = new GUIButton(buttonTexture, buttonPos, crop, &input);
 		button->setLayer(296);
 		buttons.push_back(button);

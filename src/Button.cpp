@@ -50,8 +50,7 @@ bool GUIButton::isPressed()
 
 bool GUIButton::mouseOver()
 {
-	if (Rectangle(getPosition() - getSize()/2,
-		getSize()).contains(m_input->getMousePosition()))
+	if (Rectangle(getPosition() - getSize()/2, Vector(getSize().x, getSize().y - 25)).contains(m_input->getMousePosition()))
 		return true;
 	return false;
 }
