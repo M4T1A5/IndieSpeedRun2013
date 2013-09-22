@@ -5,9 +5,9 @@ using namespace EGEMath;
 
 ParticleEngine::ParticleEngine(/*EGEMotor::Font* Font*/)
 {
- 	m_particleTexture = new Texture("tornado_sheet.png");
-	//m_featherTexture = new Texture("featherEffect.png");
-	//m_plusPoint = new Texture("plusPoint.png");
+ 	m_tornadoTexture = new Texture("tornado_sheet.png");
+	m_catTexture = new Texture("tiger.png");
+	m_bugTexture = new Texture("mosqitoes.png");
 	//m_minusPoint = new Texture("minusPoint.png");
 	//m_font = Font;
 }
@@ -47,7 +47,17 @@ void ParticleEngine::Reset()
 	m_particles.clear();
 }
 
-void ParticleEngine::addTest(EGEMath::Vector Position, EGEMath::Vector Direction)
+void ParticleEngine::addTornado(EGEMath::Vector Position, EGEMath::Vector Direction)
 {
-	m_particles.push_back(new testParticle(Position,Direction,Vector(1,1),m_particleTexture));
+	m_particles.push_back(new Tornado(Position,Direction,Vector(1,1),m_tornadoTexture));
+}
+
+void ParticleEngine::addBug(EGEMath::Vector Position, EGEMath::Vector Direction)
+{
+	m_particles.push_back(new Bug(Position,Direction,Vector(1,1),m_bugTexture));
+}
+
+void ParticleEngine::addCat(EGEMath::Vector Position, EGEMath::Vector Direction)
+{
+	m_particles.push_back(new Cat(Position,Direction,Vector(1,1),m_catTexture));
 }

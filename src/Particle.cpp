@@ -33,9 +33,9 @@ void Particle::Draw(Viewport* viewport)
 	viewport->draw(&m_sprite);
 }
 
-//Splash Particle
+//Tornado Particle
 
-testParticle::testParticle(Vector position, Vector direction, Vector scale, Texture* texture)
+Tornado::Tornado(Vector position, Vector direction, Vector scale, Texture* texture)
 	: Particle(position,Vector(direction.x/5.0f,-direction.y/5.0f),scale,texture,5.0f)
 {
 	m_startY = position.y;
@@ -52,7 +52,7 @@ testParticle::testParticle(Vector position, Vector direction, Vector scale, Text
 	//m_sprite.setColor(1,1,1,1);
 	m_timer = 2;
 }
-bool testParticle::Update(float DeltaTime)
+bool Tornado::Update(float DeltaTime)
 {
 
 	m_animation->Update(DeltaTime);
@@ -68,13 +68,47 @@ bool testParticle::Update(float DeltaTime)
 	return false;
 }
 
-void testParticle::setColor(int R,int G,int B,int A)
+void Tornado::setColor(int R,int G,int B,int A)
 {
 	m_r = R;
 	m_g = G;
 	m_b = B;
 	m_a = A;
 	m_sprite.setColor(unsigned int(m_r), unsigned int(m_g), unsigned int(m_b), unsigned int(m_a));
+}
+
+Bug::Bug(Vector position, Vector direction, Vector scale, Texture* texture)
+	: Particle(position,Vector(direction.x/5.0f,-direction.y/5.0f),scale,texture,5.0f)
+{
+	m_direction = Vector(direction.x/5.0f,-direction.y/5.0f);
+	m_sprite.setOrigin(m_sprite.getSize()/2);
+	m_sprite.setColor(255,255,255,180);
+	if (direction.x > 0)
+	{
+		m_scale.x = -m_scale.x;
+		m_sprite.setScale(m_scale);
+	}
+	m_sprite.setLayer(285);
+	//m_sprite.setColor(1,1,1,1);
+
+	m_life = 10;
+}
+
+Cat::Cat(Vector position, Vector direction, Vector scale, Texture* texture)
+	: Particle(position,Vector(direction.x/5.0f,-direction.y/5.0f),scale,texture,5.0f)
+{
+	m_direction = Vector(direction.x/5.0f,-direction.y/5.0f);
+	m_sprite.setOrigin(m_sprite.getSize()/2);
+	m_sprite.setColor(255,255,255,180);
+	if (direction.x > 0)
+	{
+		m_scale.x = -m_scale.x;
+		m_sprite.setScale(m_scale);
+	}
+	m_sprite.setLayer(285);
+	//m_sprite.setColor(1,1,1,1);
+
+	m_life = 10;
 }
 
 
