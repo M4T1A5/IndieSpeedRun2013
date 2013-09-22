@@ -2,12 +2,13 @@
 
 
 MapElement::MapElement(MapElements name, EGEMotor::Texture *texture,
-		float AOERadius, float speed, float scale, int Xframes, int Yframes)
+		float AOERadius, float speed, float scale, int Xframes, int Yframes, float fps)
 	: Radius(AOERadius),
 	  Name(name),
 	  Texture(texture),
 	  Speed(speed),
-	  Scale(scale)
+	  Scale(scale),
+	  FPS(fps)
 {
 	framesizeX = texture->getTextureSize().x / Xframes;
 	framesizeY = texture->getTextureSize().y / Yframes;
@@ -20,7 +21,7 @@ MapElement::~MapElement()
 
 Element::Element(EGEMath::Vector Position, MapElement* mapElement)
 	: AnimatedGameObject(mapElement->Texture,mapElement->frames, 
-			mapElement->framesizeX, mapElement->framesizeY,12),
+	mapElement->framesizeX, mapElement->framesizeY, mapElement->FPS),
 	  _mapElement(mapElement)
 {
 	SetSpeed(mapElement->Speed);
