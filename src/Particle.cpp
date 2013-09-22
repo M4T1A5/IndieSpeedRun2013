@@ -36,7 +36,7 @@ void Particle::Draw(Viewport* viewport)
 //Splash Particle
 
 testParticle::testParticle(Vector position, Vector direction, Vector scale, Texture* texture)
-	: Particle(position,Vector(direction.x/5.0f,-direction.y/5.0f),scale,texture,1.0f)
+	: Particle(position,Vector(direction.x/5.0f,-direction.y/5.0f),scale,texture,5.0f)
 {
 	m_startY = position.y;
 	m_direction = Vector(direction.x/5.0f,-direction.y/5.0f);
@@ -49,18 +49,33 @@ testParticle::testParticle(Vector position, Vector direction, Vector scale, Text
 		m_sprite.setScale(m_scale);
 	}
 	m_sprite.setLayer(285);
+	//m_sprite.setColor(1,1,1,1);
+	m_timer = 2;
 }
 bool testParticle::Update(float DeltaTime)
 {
+
 	m_animation->Update(DeltaTime);
-	Particle::Update(DeltaTime);
-	m_life-= DeltaTime;
+	
 	m_sprite.setPosition(Vector(m_position.x += DeltaTime * 100  , float(m_startY + 50 * sin(PI*(-m_life/m_startLife)))));
-	if (m_animation->getCurrentFrame() > 3)
-		return true;
+	if (Particle::Update(DeltaTime))
+	{
+		m_timer -= DeltaTime;
+		if (m_timer < 0)
+			return true;
+		setColor(255,255,255,255.0f*(m_timer/2.0f));
+	}
 	return false;
 }
 
+void testParticle::setColor(int R,int G,int B,int A)
+{
+	m_r = R;
+	m_g = G;
+	m_b = B;
+	m_a = A;
+	m_sprite.setColor(unsigned int(m_r), unsigned int(m_g), unsigned int(m_b), unsigned int(m_a));
+}
 
 
 
