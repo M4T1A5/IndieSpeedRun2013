@@ -171,7 +171,7 @@ void Game::Update(const double& dt)
 
 		}	
 
-		if (_clock > 1)
+		if (_clock > 10)
 		{
 			_clock=0;
 			gameState = PLAY;
