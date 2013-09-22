@@ -87,7 +87,6 @@ void Game::Update(const double& dt)
 		if (startButton->isPressed())
 			gameState = PLAY;
 		break;
-		break;
 	case PLAY:
 	case WARMUP:
 		_clock += dt;
