@@ -6,6 +6,13 @@
 #include <iostream>
 #define PI 3.14159265358979323846264
 
+enum Hazard
+{
+	tornado,
+	cat,
+	bug
+};
+
 class Particle
 {
 public:
@@ -13,6 +20,9 @@ public:
 	virtual ~Particle();
 	virtual bool Update(float DeltaTime);
 	virtual void Draw(EGEMotor::Viewport* Viewport);
+
+	float AreaOfEffect;
+	float Damage;
 
 protected:
 	EGEMath::Vector m_position;
@@ -27,11 +37,11 @@ protected:
 
 //Splash Particle
 
-class testParticle : public Particle
+class Tornado : public Particle
 {
 public:
-	testParticle(EGEMath::Vector Position, EGEMath::Vector Direction, EGEMath::Vector Scale, EGEMotor::Texture* texture);
-	~testParticle(){}
+	Tornado(EGEMath::Vector Position, EGEMath::Vector Direction, EGEMath::Vector Scale, EGEMotor::Texture* texture);
+	~Tornado(){}
 	bool Update(float DeltaTime);
 
 private:
@@ -40,6 +50,19 @@ private:
 	float m_timer, m_startY, m_r, m_g, m_b, m_a;
 };
 
+class Bug : public Particle
+{
+public:
+	Bug(EGEMath::Vector Position, EGEMath::Vector Direction, EGEMath::Vector Scale, EGEMotor::Texture* texture);
+	~Bug(){}
+};
+
+class Cat : public Particle
+{
+public:
+	Cat(EGEMath::Vector Position, EGEMath::Vector Direction, EGEMath::Vector Scale, EGEMotor::Texture* texture);
+	~Cat(){}
+};
 
 
 ////Feather Particle

@@ -51,6 +51,14 @@ Game::Game(Viewport& viewport, Input &input)
 		button->setLayer(296);
 		buttons.push_back(button);
 	}
+
+	buttons[0]->elementToSpawn = Forest;
+	buttons[1]->elementToSpawn = Swamp;
+	buttons[2]->hazardToSpawn = tornado;
+	buttons[3]->hazardToSpawn = cat;
+	buttons[4]->hazardToSpawn = bug;
+	buttons[5];
+
 	particleEngine = new ParticleEngine();
 }
 
@@ -94,15 +102,39 @@ void Game::Update(const double& dt)
 			camera->FollowMouse(dt);
 		}
 
-		if(input->isButtonPressed(Button::MouseLeft))
+		for(int i = 0; i < 2; ++i)
 		{
-			map.AddElement(Forest, input->getMousePositionOnMap());
-			particleEngine->addTest(Vector(input->getMousePositionOnMap()),Vector(5.0f,5.0f));
+			if(buttons[i]->isPressed())
+				spawnElement = buttons[i]->elementToSpawn;
+		}
+
+		for(int i = 2; i < 5; ++i)
+		{
+			if(buttons[i]->isPressed())
+				spawnHazard = buttons[i]->hazardToSpawn;
+		}
+
+		if(spawnElement > 0 && input->isButtonPressed(Button::MouseLeft))
+		{
+			map.AddElement(spawnElement, input->getMousePositionOnMap());
 
 		}
-		else if(input->isButtonPressed(Button::MouseRight))
+
+		else if(spawnHazard >= 0 && input->isButtonPressed(Button::MouseLeft) )
 		{
-			map.AddElement(Swamp, input->getMousePositionOnMap());
+			switch(spawnHazard)
+			{
+			case tornado:
+				particleEngine->addTornado(input->getMousePositionOnMap(), Vector(1,1));
+				break;
+			case cat:
+				particleEngine->addCat(input->getMousePositionOnMap(), Vector(100,1));
+				break;
+			case bug:
+				particleEngine->addBug(input->getMousePositionOnMap(), Vector(100,1));
+				break;
+			}
+
 		}
 
 		if (_clock > 30)

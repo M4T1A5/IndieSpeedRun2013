@@ -63,6 +63,9 @@ private:
 
 	std::map<ActivateButton,bool> activeButton;
 
+	MapElements spawnElement;
+	Hazard spawnHazard;
+
 	
 	float Difficulty;
 	float _clock;
