@@ -49,7 +49,7 @@ void ParticleEngine::Reset()
 
 void ParticleEngine::addTornado(EGEMath::Vector Position, EGEMath::Vector Direction)
 {
-	m_particles.push_back(new Tornado(Position,Direction,Vector(1,1),m_tornadoTexture));
+	m_particles.push_back(new Tornado(Position,Direction,Vector(0.6,0.6),m_tornadoTexture));
 }
 
 void ParticleEngine::addBug(EGEMath::Vector Position, EGEMath::Vector Direction)
@@ -59,5 +59,5 @@ void ParticleEngine::addBug(EGEMath::Vector Position, EGEMath::Vector Direction)
 
 void ParticleEngine::addCat(EGEMath::Vector Position, EGEMath::Vector Direction)
 {
-	m_particles.push_back(new Cat(Position,Direction,Vector(1,1),m_catTexture));
+	m_particles.push_back(new Cat(Position,Direction,Vector(0.6,0.6),m_catTexture));
 }

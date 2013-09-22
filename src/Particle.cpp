@@ -82,7 +82,7 @@ Bug::Bug(Vector position, Vector direction, Vector scale, Texture* texture)
 {
 	m_direction = Vector(direction.x/5.0f,-direction.y/5.0f);
 	m_sprite.setOrigin(m_sprite.getSize()/2);
-	m_sprite.setColor(255,255,255,180);
+	m_sprite.setColor(255,255,255,255);
 	if (direction.x > 0)
 	{
 		m_scale.x = -m_scale.x;
@@ -99,7 +99,7 @@ Cat::Cat(Vector position, Vector direction, Vector scale, Texture* texture)
 {
 	m_direction = Vector(direction.x/5.0f,-direction.y/5.0f);
 	m_sprite.setOrigin(m_sprite.getSize()/2);
-	m_sprite.setColor(255,255,255,180);
+	m_sprite.setColor(255,255,255,255);
 	if (direction.x > 0)
 	{
 		m_scale.x = -m_scale.x;

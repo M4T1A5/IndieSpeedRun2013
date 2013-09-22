@@ -9,6 +9,7 @@ Village::Village(Texture* texture, Vector position)
 	  NextVillager(0)
 {
 	setPosition(position);
+	setScale(2.0f);
 }
 Village::~Village()
 {}
@@ -23,3 +24,4 @@ void Village::Draw(EGEMotor::Viewport& viewport)
 {
 	GameObject::Draw(viewport);
 }
+
