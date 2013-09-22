@@ -36,7 +36,6 @@ public:
 	};
 	Game(EGEMotor::Viewport& viewport, EGEMotor::Input &input);
 	~Game();
-
 	void Update(const double& dt);
 	void Draw(EGEMotor::Viewport& viewport);
 private:

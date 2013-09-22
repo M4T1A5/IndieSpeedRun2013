@@ -89,7 +89,6 @@ Game::Game(Viewport& viewport, Input &input)
 	buttons[3]->hazardToSpawn = cat;
 	buttons[4]->hazardToSpawn = bug;
 	buttons[5];
-
 	particleEngine = new ParticleEngine();
 }
 
