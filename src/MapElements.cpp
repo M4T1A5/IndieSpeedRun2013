@@ -21,7 +21,7 @@ MapElement::~MapElement()
 
 Element::Element(EGEMath::Vector Position, MapElement* mapElement)
 	: AnimatedGameObject(mapElement->Texture,mapElement->frames, 
-	mapElement->framesizeX, mapElement->framesizeY, mapElement->FPS),
+	mapElement->framesizeX, mapElement->framesizeY, mapElement->FPS+rand()%2000/1000.0f),
 	  _mapElement(mapElement)
 {
 	SetSpeed(mapElement->Speed);
