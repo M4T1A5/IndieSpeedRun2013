@@ -15,7 +15,7 @@ Particle::Particle(Vector Position, Vector Direction, Vector Scale, Texture* Tex
 	m_sprite.setPosition(Position);
 	m_sprite.setScale(Scale);
 	m_sprite.setLayer(300);
-	m_sprite.setOrigin(m_sprite.getTextureSize()/2);
+	m_sprite.setOriginPoint(5);
 }
 Particle::~Particle()
 {}
@@ -36,13 +36,13 @@ void Particle::Draw(Viewport* viewport)
 //Tornado Particle
 
 Tornado::Tornado(Vector position, Vector direction, Vector scale, Texture* texture)
-	: Particle(position,Vector(direction.x/5.0f,-direction.y/5.0f),scale,texture,5.0f)
+	: Particle(position,Vector(direction.x/5.0f,-direction.y/5.0f),scale,texture,3.0f)
 {
 	m_startY = position.y;
 	m_direction = Vector(direction.x/5.0f,-direction.y/5.0f);
 	m_animation = new Animation(&m_sprite,3,400,600, 20,0,true);
-	m_sprite.setOrigin(m_sprite.getSize()/2);
 	m_sprite.setColor(255,255,255,180);
+	AreaOfEffect = 100;
 	if (direction.x > 0)
 	{
 		m_scale.x = -m_scale.x;
@@ -51,6 +51,7 @@ Tornado::Tornado(Vector position, Vector direction, Vector scale, Texture* textu
 	m_sprite.setLayer(285);
 	//m_sprite.setColor(1,1,1,1);
 	m_timer = 2;
+	m_sprite.setOriginPoint(5);
 }
 bool Tornado::Update(float DeltaTime)
 {
@@ -82,8 +83,8 @@ Bug::Bug(Vector position, Vector direction, Vector scale, Texture* texture)
 {
 	m_direction = Vector(direction.x/-5.0f,-direction.y/5.0f);
 	m_animation = new Animation(&m_sprite,3,200,200, 20);
-	m_sprite.setOrigin(m_sprite.getSize()/2);
 	m_sprite.setColor(255,255,255,255);
+	AreaOfEffect = 30;
 	if (direction.x > 0)
 	{
 		m_scale.x = -m_scale.x;
@@ -93,6 +94,7 @@ Bug::Bug(Vector position, Vector direction, Vector scale, Texture* texture)
 	//m_sprite.setColor(1,1,1,1);
 
 	m_life = 5;
+	m_sprite.setOriginPoint(5);
 }
 
 bool Bug::Update(float DeltaTime)
@@ -105,8 +107,8 @@ Cat::Cat(Vector position, Vector direction, Vector scale, Texture* texture)
 	: Particle(position,Vector(direction.x/5.0f,-direction.y/5.0f),scale,texture,5.0f)
 {
 	m_direction = Vector(direction.x/-5.0f,-direction.y/5.0f);
-	m_sprite.setOrigin(m_sprite.getSize()/2);
 	m_sprite.setColor(255,255,255,255);
+	AreaOfEffect = 60;
 	if (direction.x > 0)
 	{
 		m_scale.x = -m_scale.x;
@@ -116,6 +118,7 @@ Cat::Cat(Vector position, Vector direction, Vector scale, Texture* texture)
 	//m_sprite.setColor(1,1,1,1);
 
 	m_life = 10;
+	m_sprite.setOriginPoint(5);
 }
 
 

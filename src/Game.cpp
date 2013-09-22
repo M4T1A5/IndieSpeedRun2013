@@ -171,7 +171,7 @@ void Game::Update(const double& dt)
 
 		}	
 
-		if (_clock > 10)
+		if (_clock > 20)
 		{
 			_clock=0;
 			gameState = PLAY;
@@ -292,21 +292,21 @@ void Game::Update(const double& dt)
 			
 			for (int j=0; j<particleEngine->m_TornadoParticles.size();++j)
 			{
-				if ((_explorers[i]->getPosition()-particleEngine->m_TornadoParticles[j]->m_position).getLenght() < particleEngine->m_TornadoParticles[j]->AreaOfEffect)
+				if ((_explorers[i]->getPosition()-particleEngine->m_TornadoParticles[j]->m_position+Vector(0,-60)).getLenght() < particleEngine->m_TornadoParticles[j]->AreaOfEffect)
 				{
-					_explorers[i]->setPosition(particleEngine->m_TornadoParticles[j]->m_position);
+					_explorers[i]->setPosition(particleEngine->m_TornadoParticles[j]->m_position+Vector(0,-10));
 				}
 			}
 			for (int j=0; j<particleEngine->m_BugParticles.size();++j)
 			{
-				if ((_explorers[i]->getPosition()-particleEngine->m_TornadoParticles[j]->m_position).getLenght() < particleEngine->m_TornadoParticles[j]->AreaOfEffect)
+				if ((_explorers[i]->getPosition()-particleEngine->m_BugParticles[j]->m_position+Vector(0,80)).getLenght() < particleEngine->m_BugParticles[j]->AreaOfEffect)
 				{
 					_explorers[i]->poison = true;
 				}
 			}
 			for (int j=0; j<particleEngine->m_CatParticles.size();++j)
 			{
-				if ((_explorers[i]->getPosition()-particleEngine->m_TornadoParticles[j]->m_position).getLenght() < particleEngine->m_TornadoParticles[j]->AreaOfEffect)
+				if ((_explorers[i]->getPosition()-particleEngine->m_CatParticles[j]->m_position).getLenght() < particleEngine->m_CatParticles[j]->AreaOfEffect)
 				{
 					_explorers[i]->dead = true;
 				}
