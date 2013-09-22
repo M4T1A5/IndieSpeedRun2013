@@ -12,6 +12,10 @@ public:
 
 	void Update(float dt, EGEMath::Vector destination);
 	void Draw(EGEMotor::Viewport& viewport);
+protected:
+	void move(const double& dt);
+	float clock, nextTurn;
+
 
 };
 

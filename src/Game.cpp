@@ -15,7 +15,7 @@ Game::Game(Viewport& viewport, Input &input)
 	camera = new Camera(input, viewport, map.GetSize());
 	_townTexture.loadTexture("village.png");
 	//_villageTexture.loadTexture("");
-	_explorerTexture.loadTexture("arke_stand.png");
+	_explorerTexture.loadTexture("arke_sheet.png");
 	_villages.push_back(new Village(&_townTexture,Vector(300,800)));
 }
 
@@ -73,8 +73,11 @@ void Game::Update(const double& dt)
 			if (_villages[i]->Clock > _villages[i]->NextVillager)
 			{
 				_villages[i]->Clock -= _villages[i]->NextVillager;
-				_explorers.push_back(new Explorer(&_explorerTexture,16,4,4,12,_villages[i]->getPosition()));
-				_villages[i]->NextVillager = rand()%100/Difficulty;
+				_villages[i]->NextVillager = (rand()%10)/Difficulty;
+				_explorers.push_back(new Explorer(&_explorerTexture,16,
+					_explorerTexture.getTextureSize().x/4.0f,
+					_explorerTexture.getTextureSize().y/4.0f,
+					12,_villages[i]->getPosition()));
 			}
 		}
 		

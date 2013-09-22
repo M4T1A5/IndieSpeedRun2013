@@ -56,7 +56,7 @@ float GameObject::GetSpeed()
 }
 
 
-// Private
+// Protected
 void GameObject::move(const double& dt)
 {
 	if(_targetPos.getLenght() > 0)
